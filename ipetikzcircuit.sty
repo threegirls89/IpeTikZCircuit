@@ -173,7 +173,7 @@
 \def\itc@@BATT[#1]{%
     \ifnum#1=1
         \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
-            \useasboundingbox (0,-1.5) rectangle (4,1.5);
+            \useasboundingbox (0,-2) rectangle (4,2);
             \draw [line width=\itcLinewidth] (0,0)--(1.5,0);
             \draw [line width=\itcLinewidth] (4,0)--+(-1.5,0);
             \draw [line width=\itcLinewidth] (1.5,0)+(0,-1.5)--+(0,1.5);
@@ -185,7 +185,7 @@
             \itc@tempdima=1.5\itc@tempdima
             \advance \itc@tempdima1.5 \p@
             \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
-                \useasboundingbox (0,-1.5) rectangle (\itcrmpt\itc@tempdima,1.5);
+                \useasboundingbox (0,-2) rectangle (\itcrmpt\itc@tempdima,2);
                 \draw [line width=\itcLinewidth] (0,0)--(1,0);
                 \draw [line width=\itcLinewidth] (\itcrmpt\itc@tempdima,0)--+(-1,0);
                 \itc@tempcnta=0%
@@ -222,7 +222,7 @@
 \def\itcGND[#1]{%
     \ifx#1s%
         \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
-            \useasboundingbox (-0.625,-2) rectangle (0.625,0);
+            \useasboundingbox (-1,-2) rectangle (1,0);
             \draw [line width=\itcLinewidth] (0,0)--(0,-1);
             \draw [line width=\itcLinewidth] (-0.625,-1)--++(0.625,-1)--++(0.625,1)--cycle;
         \end{tikzpicture}%
