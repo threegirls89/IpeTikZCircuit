@@ -16,6 +16,9 @@
 \newcount\itc@tempcntb
 \newdimen\itc@tempdima
 \newdimen\itc@tempdimb
+\def\itc@reservedarga{}
+\def\itc@reservedargb{}
+\def\itc@reservedargc{}
 
 %\thedimenからptを除去
 \begingroup
@@ -91,8 +94,6 @@
 }
 % コイル
 % \itcL[#1](#2)[#3]. #1: ターン数 #2: タップ位置 なければ省略 #3: 鉄心数を指定 0, 1, 2省略時はなし
-\def\itc@reservedarga{}
-\def\itc@reservedargb{}
 \def\itcL[#1]{%
     \def\itc@reservedarga{#1}%
     \futurelet\itc@nexttok\itc@L%
@@ -400,4 +401,71 @@
             \fi
         \end{tikzpicture}%
     \fi%
+}
+% ダイオード
+\def\itcD{%
+\begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+    \useasboundingbox (0,-1) rectangle (4,1);
+    \draw [line width=\itcLinewidth] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth] (3,0)--(4,0);
+    \fill[black](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
+    \fill[black] (2,0)+(1,1) rectangle +(0.714286,-1);
+\end{tikzpicture}%
+}
+% MOSFET
+% #1: チャネル p, n #2 エンハンスメント e, デプレッション d #3: ゲート端子の位置 r c l #4:ゲート端子がcの時のゲートから見たソースの向きr, l
+\def\itcMOSFET[#1][#2][#3]{%
+    \def\itc@reservedarga{#1}%
+    \def\itc@reservedargb{#2}%
+    \def\itc@reservedargc{#3}%
+    \futurelet\itc@nexttok\itc@MOSFET%
+}
+\def\itc@MOSFET{%
+    \ifx\itc@nexttok[%
+        \def\itc@nextproc{\itc@@MOSFET[\itc@reservedarga][\itc@reservedargb][\itc@reservedargc]}%
+    \else
+        \def\itc@nextproc{\itc@@MOSFET[\itc@reservedarga][\itc@reservedargb][\itc@reservedargc][]}%
+    \fi
+    \itc@nextproc%
+}
+\def\itc@@MOSFET[#1][#2][#3][#4]{%
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (0,-3) rectangle (6,3);
+        \draw [line width=\itcLinewidth] (3,0) circle[radius=2.25];
+        \fill [black] (2,-1) rectangle (1.625,1);
+        \if#3c%
+            \edef\itc@temparg{#4}
+            \draw [line width=\itcLinewidth] (0,0) -- (2,0);
+        \else
+            \edef\itc@temparg{#3}
+            \if#3l%
+                \draw [line width=\itcLinewidth] (0,1) -- (2,1);
+            \else
+                \draw [line width=\itcLinewidth] (0,-1) -- (2,-1);
+            \fi
+        \fi
+        \if#2d%
+            \fill [black] (2.375,1.5) rectangle (2.625,-1.5);
+        \else
+            \fill [black] (2.375,1.5) rectangle (2.625, 0.75);
+            \fill [black] (2.375,0.375) rectangle (2.625, -0.375);
+            \fill [black] (2.375,-1.5) rectangle (2.625, -0.75);
+        \fi
+        \draw [line width=\itcLinewidth] (4,3)--(4,1)--(2.625,1);
+        \draw [line width=\itcLinewidth] (4,-3)--(4,-1)--(2.625,-1);
+        \if\itc@temparg l%
+            \draw [line width=\itcLinewidth] (4,1) -- (4,0);
+            \fill [black] (4,1) circle[radius=0.2];
+        \else
+            \draw [line width=\itcLinewidth] (4,-1) -- (4,0);
+            \fill [black] (4,-1) circle[radius=0.2];
+        \fi
+        \itc@tempdima=\itcUnitlength
+        \itc@tempdima=0.75\itc@tempdima
+        \if#1p%
+            \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}] (2.625,0)--(4,0);
+        \else
+            \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]},cap=rect] (4,0)--(2.625,0);
+        \fi
+    \end{tikzpicture}%
 }
