@@ -412,6 +412,147 @@
     \fill[black] (2,0)+(1,1) rectangle +(0.714286,-1);
 \end{tikzpicture}%
 }
+% ツェナーダイオード
+\def\itcZD{%
+\begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+    \useasboundingbox (0,-1) rectangle (4,1);
+    \draw [line width=\itcLinewidth] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth] (2.714286,0)--(4,0);
+    \fill[black](2,0)+(-1.285714,1)--+(-1.285714,-1)--+(0.428571,0);
+    \fill[black](2,0)+(0.714286,1)--+(0.714286,-0.928571)--+(1.285714,-0.928571)--+(1.285714,-1)--+(0.428571,-1)--+(0.428571,0.928571)--+(-0.142857,0.928571)--+(-0.142857,1);
+\end{tikzpicture}%
+}
+% ショットキーダイオード
+\def\itcSBD{%
+\begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+    \useasboundingbox (0,-2) rectangle (4,2);
+    \draw [line width=\itcLinewidth] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth] (2.857143,0)--(4,0);
+    \fill[black](2,0)+(-1.142857,1)--+(-1.142857,-1)--+(0.571429,0);
+    \fill[black](2.571429,1)--(2.571429,-1) arc [start angle=360,end angle=180,radius=0.142857] --(2.285714,-1) arc[start angle=180,end angle=360,radius=0.285714]--(2.857143,1) arc [start angle=180,end angle=0,radius=0.142857]--(3.142857,1) arc[start angle=0,end angle=180,radius=0.285714];
+\end{tikzpicture}%
+}
+% 可変容量ダイオード
+\def\itcVCD{%
+\begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+    \useasboundingbox (0,-1) rectangle (4,1);
+    \draw [line width=\itcLinewidth] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth] (3.2857143,0)--(4,0);
+    \fill[black](2,0)+(-1.2857143,1)--+(-1.2857143,-1)--+(0.428571,0);
+    \fill[black] (2,0)+(0.428571,1) rectangle +(0.714286,-1);
+    \fill[black] (2,0)+(1,1) rectangle +(1.2857143,-1);
+\end{tikzpicture}%
+}
+% LED
+\def\itcLED{%
+\begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+    \useasboundingbox (0,-1) rectangle (4,3);
+    \draw [line width=\itcLinewidth] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth] (3,0)--(4,0);
+    \fill[black](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
+    \fill[black] (2,0)+(1,1) rectangle +(0.714286,-1);
+    \itc@tempdima=\itcUnitlength
+    \itc@tempdima=0.75\itc@tempdima
+    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](2.25,1.75)--(3.5,3);
+    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](2.75,1.25)--(4,2.5);
+    \end{tikzpicture}%
+}
+% フォトダイオード
+\def\itcPD{%
+\begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+    \useasboundingbox (0,-3) rectangle (4,1);
+    \draw [line width=\itcLinewidth] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth] (3,0)--(4,0);
+    \fill[black](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
+    \fill[black] (2,0)+(1,1) rectangle +(0.714286,-1);
+    \itc@tempdima=\itcUnitlength
+    \itc@tempdima=0.75\itc@tempdima
+    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](0.5,-3)--(1.75,-1.75);
+    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](0,-2.5)--(1.25,-1.25);
+    \end{tikzpicture}%
+}
+% サイリスタ
+\def\itcSCR[#1]{%
+\begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+    \useasboundingbox (0,-1) rectangle (4,1);
+    \draw [line width=\itcLinewidth] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth] (3,0)--(4,0);
+    \fill[black](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
+    \fill[black] (2,0)+(1,1) rectangle +(0.714286,-1);
+    \if#1l%
+        \draw [line width=\itcLinewidth] (3,0)--(4,1);
+    \else
+        \draw [line width=\itcLinewidth] (3,0)--(4,-1);
+    \fi
+    \end{tikzpicture}%
+}
+% トランジスタ
+% #1 構造 n (NPN), p (PNP) #2 ベースから見たエミッタの向き r（右），l（左） 
+\def\itcTR[#1][#2]{%
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (0,-3) rectangle (6,3);
+        \draw [line width=\itcLinewidth] (3,0) circle[radius=2.25];
+        \fill [black] (1.875,-1.25) rectangle (2.25,1.25);
+        \draw [line width=\itcLinewidth](0,0)--(1.875,0);
+        \draw [line width=\itcLinewidth](4,3)--(4,2.015564);
+        \draw [line width=\itcLinewidth](4,-3)--(4,-2.015564);
+        \itc@tempdima=\itcUnitlength
+        \if#1p%
+            \if#2l%
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,2.015565)--(2.2,0.52);
+                \draw [line width=\itcLinewidth](2.2,-0.52)--(4.02,-2.015565);
+            \else
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,-2.015565)--(2.2,-0.52);
+                \draw [line width=\itcLinewidth](2.2,0.52)--(4,2.015565);
+            \fi
+        \else
+            \if#2l%
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,0.52)--(4,2.015565);
+                \draw [line width=\itcLinewidth](2.2,-0.52)--(4,-2.015565);
+            \else
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,-0.52)--(4,-2.015565);
+                \draw [line width=\itcLinewidth](2.2,0.52)--(4,2.015565);
+            \fi
+        \fi
+    \end{tikzpicture}%
+}
+% JFET
+% #1 構造 n (n ch), p (p ch) #2 ゲートから見たソースの向き r（右），l（左）, c（中央） 
+\def\itcFET[#1][#2]{%
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (0,-3) rectangle (6,3);
+        \draw [line width=\itcLinewidth] (3,0) circle[radius=2.25];
+        \fill [black] (1.875,-1.25) rectangle (2.25,1.25);
+        \draw [line width=\itcLinewidth](4,3)--(4,1)--(2.25,1);
+        \draw [line width=\itcLinewidth](4,-3)--(4,-1)--(2.25,-1);
+        \itc@tempdima=\itcUnitlength
+        \itc@tempdima=0.6\itc@tempdima
+        \if#1p%
+            \if#2c%
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](1.875,0)--(0.75,0);
+                \draw [line width=\itcLinewidth](0,0)--(0.75,0);
+            \else
+                \if#2l%
+                    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](1.875,1)--(1,1);
+                    \draw [line width=\itcLinewidth](0,1)--(1,1);
+                \else
+                    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](1.875,-1)--(1,-1);
+                    \draw [line width=\itcLinewidth](0,-1)--(1,-1);
+                \fi
+            \fi
+        \else
+            \if#2c%
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](0,0)--(1.93,0);
+            \else
+                \if#2l%
+                    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](0,1)--(1.93,1);
+                \else
+                    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](0,-1)--(1.93,-1);
+                \fi
+            \fi
+        \fi
+    \end{tikzpicture}%
+}
 % MOSFET
 % #1: チャネル p, n #2 エンハンスメント e, デプレッション d #3: ゲート端子の位置 r c l #4:ゲート端子がcの時のゲートから見たソースの向きr, l
 \def\itcMOSFET[#1][#2][#3]{%
@@ -466,6 +607,106 @@
             \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}] (2.625,0)--(4,0);
         \else
             \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]},cap=rect] (4,0)--(2.625,0);
+        \fi
+    \end{tikzpicture}%
+}
+% MOSトランジスタ簡易表記
+% #1 p, n
+\def\itcMOSTR[#1]{%
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (0,-2) rectangle (4,2);
+        \draw [line width=\itcLinewidth] (1.8,1)--++(0,-2);
+        \draw [line width=\itcLinewidth] (4,2)--(4,1)--(2.25,1)--(2.25,-1)--(4,-1)--(4,-2);
+        \if#1p%
+            \draw [line width=\itcLinewidth] (1.52,0) circle [radius=0.28];
+            \draw [line width=\itcLinewidth] (0,0)--(1.24,0);
+        \else
+            \draw [line width=\itcLinewidth] (1.8,0)--(0,0);
+        \fi
+    \end{tikzpicture}%
+}
+% IGBT
+% #1: チャネル p, n #2: ゲート端子の位置 r c l #3:ゲート端子がcの時のゲートから見たエミッタの向きr, l
+\def\itcIGBT[#1][#2]{%
+    \def\itc@reservedarga{#1}%
+    \def\itc@reservedargb{#2}%
+    \futurelet\itc@nexttok\itc@IGBT%
+}
+\def\itc@IGBT{%
+    \ifx\itc@nexttok[%
+        \def\itc@nextproc{\itc@@IGBT[\itc@reservedarga][\itc@reservedargb]}%
+    \else
+        \def\itc@nextproc{\itc@@IGBT[\itc@reservedarga][\itc@reservedargb][]}%
+    \fi
+    \itc@nextproc%
+}
+\def\itc@@IGBT[#1][#2][#3]{%
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (0,-3) rectangle (6,3);
+        \draw [line width=\itcLinewidth] (3,0) circle[radius=2.25];
+        \if#2c%
+            \edef\itc@temparg{#3}
+            \draw [line width=\itcLinewidth] (0,0) -- (1.575,0);
+        \else
+            \edef\itc@temparg{#2}
+            \if#2l%
+                \draw [line width=\itcLinewidth] (0,1) -- (1.575,1);
+            \else
+                \draw [line width=\itcLinewidth] (0,-1) -- (1.575,-1);
+            \fi
+        \fi
+        \fill [black] (1.25,-1) rectangle (1.575,1);
+        \fill [black] (1.875,-1.25) rectangle (2.25,1.25);
+        \draw [line width=\itcLinewidth](4,3)--(4,2.015564);
+        \draw [line width=\itcLinewidth](4,-3)--(4,-2.015564);
+        \itc@tempdima=\itcUnitlength
+        \if#1p%
+            \if\itc@temparg l%
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,2.015565)--(2.2,0.52);
+                \draw [line width=\itcLinewidth](2.2,-0.52)--(4.02,-2.015565);
+            \else
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,-2.015565)--(2.2,-0.52);
+                \draw [line width=\itcLinewidth](2.2,0.52)--(4,2.015565);
+            \fi
+        \else
+            \if\itc@temparg l%
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,0.52)--(4,2.015565);
+                \draw [line width=\itcLinewidth](2.2,-0.52)--(4,-2.015565);
+            \else
+                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,-0.52)--(4,-2.015565);
+                \draw [line width=\itcLinewidth](2.2,0.52)--(4,2.015565);
+            \fi
+        \fi
+    \end{tikzpicture}%
+}
+% OPAmp
+% #1: r:出力端子から見て+が右側, l:左側 #2 電源端子の有無 v: 両方 r: 出力端子から見て右側のみ l: 左側のみ 省略: ない
+
+\def\itcOPAMP[#1][#2]{%
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (-8,-4) rectangle (0,4);
+        \draw [line width=\itcLinewidth](0,0)--(-1,0);
+        \draw [line width=\itcLinewidth](-8,2)--++(1,0);
+        \draw [line width=\itcLinewidth](-8,-2)--++(1,0);
+        \draw [line width=\itcLinewidth](-1,0)--++(-6,3.5)--++(0,-7)--cycle;
+        \if#2v%
+            \draw [line width=\itcLinewidth](-4,4)--++(0,-2.25);
+            \draw [line width=\itcLinewidth](-4,-4)--++(0,2.25);
+        \else
+            \if#2r%
+                \draw [line width=\itcLinewidth](-4,3)--++(0,-1.25);
+            \else
+                \if#2l%
+                    \draw [line width=\itcLinewidth](-4,-3)--++(0,1.25);
+                \fi
+            \fi
+        \fi
+        \draw [line width=\itcLinewidth](-6.5,2)--++(1,0);
+        \draw [line width=\itcLinewidth](-6.5,-2)--++(1,0);
+        \if#1l%
+            \draw [line width=\itcLinewidth](-6,-2.5)--++(0,1);
+        \else
+            \draw [line width=\itcLinewidth](-6,2.5)--++(0,-1);
         \fi
     \end{tikzpicture}%
 }
