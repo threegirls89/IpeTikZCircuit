@@ -1,5 +1,5 @@
 # IpeTikZcircuit
-IpeTikZcircuitは，ドロー系画像作成ソフトウェアIpeの上で使用する，回路図記号を描画するためのスタイルファイルです。
+IpeTikZcircuitは，ドロー系画像作成ソフトウェア[Ipe](http://ipe.otfried.org/)の上で使用する，回路図記号を描画するためのスタイルファイルです。
 
 拙作pscircuit.styの描画エンジンをPostScriptからTikZに変更し，Ipeの助けを借りてWYSIWYG環境で実現したものです。
 
