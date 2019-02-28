@@ -123,8 +123,8 @@
     \itc@nextproc%
 }
 \def\itc@@@@L[#1](#2)[#3]{%
-    \itc@tempcnta=#1%
-    \advance \itc@tempcnta 3% 
+    \itc@tempcnta=#1
+    \advance \itc@tempcnta 3
     % r = 0.5 / cos(theta), theta = 48 rem = 1.5 - r
     %rem=0.752762, r=0.747238
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
@@ -324,7 +324,7 @@
                 \draw [line width=\itcLinewidth] (1.05,0)--(3,1.5);
             \fi
         \end{tikzpicture}%
-    \fi
+    \fi%
 }
 % モーメンタリのスイッチ
 % #1: 接点 a(NO), b(NC), c(toggle) #2: l, r 共通接点の向き t,b NCとなる接点（上下）
@@ -681,7 +681,6 @@
 }
 % OPAmp
 % #1: r:出力端子から見て+が右側, l:左側 #2 電源端子の有無 v: 両方 r: 出力端子から見て右側のみ l: 左側のみ 省略: ない
-
 \def\itcOPAMP[#1][#2]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (-8,-4) rectangle (0,4);
