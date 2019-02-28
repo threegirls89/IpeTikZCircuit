@@ -137,7 +137,7 @@
                 \advance \itc@tempdima 2\p@
                 \draw [line width=\itcLinewidth,line cap=round](\itcrmpt\itc@tempdima,-0.555306) arc [start angle=-48,end angle=228,radius=0.747238];
                 \advance\itc@tempcntb 1
-            \ifnum\itc@tempcntb<#1\repeat%
+            \ifnum#1>\itc@tempcntb\repeat%
         \fi
         \draw [line width=\itcLinewidth,line cap=round] (2,-0.555306) arc [start angle=-48,end angle=180,radius=0.747238]--(0,0);
         \ifnum#3>0%
@@ -197,7 +197,7 @@
                     \draw [line width=\itcLinewidth] (\itcrmpt\itc@tempdima,0)+(0,-1.5)--+(0,1.5);
                     \fill[black] (\itcrmpt\itc@tempdima,0)+(0.5,-0.5) rectangle +(1,0.5);
                     \advance\itc@tempcnta 1
-                \ifnum\itc@tempcnta<#1 \repeat
+                \ifnum#1>\itc@tempcnta\repeat
             \end{tikzpicture}%
         \else
             \itc@tempdima=#1\p@
@@ -215,7 +215,7 @@
                     \draw [line width=\itcLinewidth] (\itcrmpt\itc@tempdima,0)+(0,-1.5)--+(0,1.5);
                     \fill[black] (\itcrmpt\itc@tempdima,0)+(0.5,-0.5) rectangle +(1,0.5);
                 \advance\itc@tempcnta 1
-                \ifnum\itc@tempcnta<#1 \repeat%
+                \ifnum#1>\itc@tempcnta\repeat%
             \end{tikzpicture}%
         \fi
     \fi%
