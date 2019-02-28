@@ -1,25 +1,42 @@
 # IpeTikZcircuit
 IpeTikZcircuitは，ドロー系画像作成ソフトウェアIpeの上で使用する，回路図記号を描画するためのスタイルファイルです。
 
-拙作pscircuit.styをIpeの助けを借りてWYSIWYG環境に移植したものです。
+拙作pscircuit.styの描画エンジンをPostScriptからTikZに変更し，Ipeの助けを借りてWYSIWYG環境で実現したものです。
 
-回路図記号の描画をPostScriptからTikZに変更しています。
+使用例を下図に示します。
+
+<img width="800" alt="IpeTikzCircuitを使っている様子" src="example4md.png">
 
 # 特徴
-高品位なドロー系画像作成ソフトウェアとして名高いIpeを回路図エディタにできる！
+高品位なドロー系画像作成ソフトウェアとして名高い**Ipe**を**回路図エディタ**にできる！！！！
 
-WYSIWYGで使いやすい！
+**WYSIWYG**で使いやすい！
 
-日本式の回路図記号かつとっても綺麗！
+**日本式の回路図記号**かつとっても綺麗！！！！
+
+TikZの利用により図の描画が爆速！
 
 # 導入方法
-LaTeXスタイルファイルですが，Ipe上における使用が前提となります。
+(2019.2.28 isyファイルを作成したので更新)
 
+IpeのスタイルファイルであるisyファイルとLaTeXのスタイルファイルであるstyファイルの2種類が提供されています。
+お好みの方をご利用ください。
+
+## isyファイルを利用する場合（早くて楽）
 1. LaTeX，TikZとIpeを使用可能にしておく。
 
-2. ipetikzcircuit.styをtexmfツリーのどこか，または本スタイルファイルを適用したいipeファイルのあるディレクトリに設置する。
+2. メニューのEdit -> Style sheetsでIpe style sheetsウインドウを表示し，add -> ファイルダイアログでipetikzcircuit.isyを探して選択する。
 
-3. ipeにおいてメニューのEdit -> Document propertiesでIpe document propertiesウインドウを表示し，Latex preambleのテキストボックスに
+3. Ipe style sheetsウインドウの左側のテキストボックスにipetikzcircuitが追加されていることを確認して，Okボタンで閉じる。
+
+4. Enjoy!!
+
+## styファイルを使用する場合
+1. LaTeX，TikZとIpeを使用可能にしておく。
+
+2. ipetikzcircuit.styをtexmfツリーのどこか，または本スタイルファイルを適用したいファイルのあるディレクトリに設置する。
+
+3. IpeにおいてメニューのEdit -> Document propertiesでIpe document propertiesウインドウを表示し，Latex preambleのテキストボックスに
 ```\usepackage{ipetikzcircuit}```
 と書き，Okボタンで閉じる。
 
