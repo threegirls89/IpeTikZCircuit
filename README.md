@@ -50,6 +50,8 @@ IpeのスタイルファイルであるisyファイルとLaTeXのスタイルフ
 
 例えば，labelのテキストを \itcR とすると，ラベルに抵抗が描画されます。
 
+## 回路素子描画コマンド
+
 * `\itcR`<br>
     抵抗を描画する。
 
@@ -69,8 +71,8 @@ IpeのスタイルファイルであるisyファイルとLaTeXのスタイルフ
 * `\itcL[#1](#2)[#3]`<br>
 引数:<br>
         #1 巻数。1以上の整数。省略不可。<br>
-        #2 中間タップを出す位置。始点に近いターン頂点を1とする自然数をタップの数だけ`,' 区切
-りで入力する。タップがない時は省略。<br>
+        #2 中間タップを出す位置。始点に近いターン頂点を1とする自然数をタップの数だけ`,' 区切りで入力する。
+        タップがない時は省略。<br>
         #3 鉄心の線を書く本数。0，1，2の何れか。ない時は省略可能。
 
     コイルを描画する。
@@ -182,3 +184,20 @@ IpeのスタイルファイルであるisyファイルとLaTeXのスタイルフ
 
     オペアンプを描画する。
 
+## その他コマンド
+* 回路図記号の大きさを変える
+
+    `\renewcommand{\itcUnitlength}{大きさ}`をIpe document propertiesのLatex preambleに記述する。
+
+    デフォルトでは4 bp（bp: big point, 1/72 inchでありipeやpdfのptと同じ大きさの単位。なおlatexのptは1/72.27 inch）です。
+
+    isyファイルを利用している場合はどこに書いても好い。
+    styファイルを利用している場合は`\usepackage{ipetikzcircuit}`の後に書く。
+
+* 線の太さを変える
+    `\renewcommand{\itcLinewidth}{大きさ}`をIpe document propertiesのLatex preambleに記述する。
+
+    デフォルトでは0.5 pt。
+
+    isyファイルを利用している場合はどこに書いても好い。
+    styファイルを利用している場合は`\usepackage{ipetikzcircuit}`の後に書く。
