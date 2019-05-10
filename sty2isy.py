@@ -9,14 +9,13 @@ fout.write('<ipestyle name="ipetikzcircuit">\n<preamble>\n\\makeatletter\n')
 i = 0
 for line in fin:
     i += 1
-    print(str(i))
     if line[0] == '%' or i <= 7:
         continue
     else:
         line = line.replace('RequirePackage', 'usepackage')
         fout.write(line)
 
-fout.write('</preamble>\n</ipestyle>\n\\makeatletter\n')
+fout.write('</preamble>\n</ipestyle>\n\\makeatother\n')
 
 fin.close()
 fout.close()
