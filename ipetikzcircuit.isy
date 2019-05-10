@@ -4,9 +4,15 @@
 \usepackage{graphicx,xcolor}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
-\def\itcUnitlength{4bp}
-\def\itcLinewidth{0.5pt}
-
+\newcommand{\itcUnitlength}{4bp}
+\newcommand{\itcLineUltrathin}{0.1bp}
+\newcommand{\itcLineThin}{0.2bp}
+\newcommand{\itcLineLighter}{0.4bp}
+\newcommand{\itcLineNormal}{0.5bp}
+\newcommand{\itcLineHeavier}{0.75bp}
+\newcommand{\itcFat}{1.0bp}
+\newcommand{\itcUltrafat}{1.5bp}
+\newcommand{\itcLinewidth}{\itcLineNormal}% 
 \newcount\itc@tempcnta
 \newcount\itc@tempcntb
 \newdimen\itc@tempdima
@@ -671,4 +677,4 @@
 }
 </preamble>
 </ipestyle>
-\makeatletter
+\makeatother
