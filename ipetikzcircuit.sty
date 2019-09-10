@@ -37,12 +37,15 @@
 \def\itc@rmpt@x{\def\itc@rmpt##1.##2PT{##1\ifnum##2>0.##2\fi}}}
 \expandafter\endgroup\itc@rmpt@x
 \def\itcrmpt{\expandafter\itc@rmpt\the}
-
+%
+\edef\itc@color{black}
+\def\itccolor#1{\edef\itc@color{#1}\unskip}
+\def\itcresetcolor{\edef\itc@color{black}\unskip}
 % 抵抗
 \def\itcR{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-1) rectangle (4,1);
-        \draw [line width=\itcLinewidth] (0,0)--(0.8,0)--(1.0,0.5)--(1.4,-0.5)--(1.8,0.5)--(2.2,-0.5)--(2.6,0.5)--(3.0,-0.5)--(3.2,0)--(4.0,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.8,0)--(1.0,0.5)--(1.4,-0.5)--(1.8,0.5)--(2.2,-0.5)--(2.6,0.5)--(3.0,-0.5)--(3.2,0)--(4.0,0);
     \end{tikzpicture}%
 }
 %可変抵抗 3端子のみ
@@ -72,19 +75,19 @@
 \def\itcZ{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-1) rectangle (4,1);
-        \draw [line width=\itcLinewidth] (0,0)--(0.8,0);
-        \draw [line width=\itcLinewidth] (3.2,0)--(4.0,0);
-        \draw [line width=\itcLinewidth] (0.8,-0.5) rectangle (3.2,0.5);
+        \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.8,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (3.2,0)--(4.0,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (0.8,-0.5) rectangle (3.2,0.5);
     \end{tikzpicture}%
 }
 % コンデンサ
 \def\itcC{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-1) rectangle (4,1);
-        \draw [line width=\itcLinewidth] (0,0)--(1.5,0);
-        \fill[black] (1.5,-1) rectangle (1.75,1);
-        \fill[black] (2.5,-1) rectangle (2.25,1);
-        \draw [line width=\itcLinewidth] (2.5,0)--(4,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1.5,0);
+        \fill[color=\itc@color] (1.5,-1) rectangle (1.75,1);
+        \fill[color=\itc@color] (2.5,-1) rectangle (2.25,1);
+        \draw [line width=\itcLinewidth,color=\itc@color] (2.5,0)--(4,0);
     \end{tikzpicture}%
 }
 % 電解コンデンサ \itcCC
@@ -92,13 +95,13 @@
 \def\itcCC{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-1) rectangle (4,1);
-        \draw [line width=\itcLinewidth] (0,0)--(1.5,0);
-        \fill[black] (1.5,-1) rectangle (1.75,1);
-        \fill[black] (2.5,-1) rectangle (2.25,1);
-        \draw [line width=\itcLinewidth] (2.5,0)--(4,0);
-        \draw [line width=\itcLinewidth] (1.7,0.125)--(2.3,-0.125);
-        \draw [line width=\itcLinewidth] (1.7,0.875)--(2.3,0.625);
-        \draw [line width=\itcLinewidth] (1.7,-0.625)--(2.3,-0.875);
+        \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1.5,0);
+        \fill[color=\itc@color] (1.5,-1) rectangle (1.75,1);
+        \fill[color=\itc@color] (2.5,-1) rectangle (2.25,1);
+        \draw [line width=\itcLinewidth,color=\itc@color] (2.5,0)--(4,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (1.7,0.125)--(2.3,-0.125);
+        \draw [line width=\itcLinewidth,color=\itc@color] (1.7,0.875)--(2.3,0.625);
+        \draw [line width=\itcLinewidth,color=\itc@color] (1.7,-0.625)--(2.3,-0.875);
     \end{tikzpicture}%
 }
 % コイル
@@ -138,23 +141,23 @@
     %rem=0.752762, r=0.747238
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-1) rectangle (\the\itc@tempcnta,2);
-        \draw [line width=\itcLinewidth,line cap=round] (\the\itc@tempcnta,0)--++(-0.752762,0) arc[start angle=0,end angle=228,radius=0.747238];
+        \draw [line width=\itcLinewidth,line cap=round,color=\itc@color] (\the\itc@tempcnta,0)--++(-0.752762,0) arc[start angle=0,end angle=228,radius=0.747238];
         \ifnum#1>1%
             \itc@tempcntb=1
             \loop
                 \itc@tempdima=\itc@tempcntb\p@
                 \advance \itc@tempdima 2\p@
-                \draw [line width=\itcLinewidth,line cap=round](\itcrmpt\itc@tempdima,-0.555306) arc [start angle=-48,end angle=228,radius=0.747238];
+                \draw [line width=\itcLinewidth,line cap=round,color=\itc@color](\itcrmpt\itc@tempdima,-0.555306) arc [start angle=-48,end angle=228,radius=0.747238];
                 \advance\itc@tempcntb 1
             \ifnum#1>\itc@tempcntb\repeat%
         \fi
-        \draw [line width=\itcLinewidth,line cap=round] (2,-0.555306) arc [start angle=-48,end angle=180,radius=0.747238]--(0,0);
+        \draw [line width=\itcLinewidth,line cap=round,color=\itc@color] (2,-0.555306) arc [start angle=-48,end angle=180,radius=0.747238]--(0,0);
         \ifnum#3>0%
             \itc@tempdima=\itc@tempcnta\p@
             \advance\itc@tempdima -0.752762\p@
-            \draw [line width=\itcLinewidth](0.752762,1.25)--(\itcrmpt\itc@tempdima,1.25);
+            \draw [line width=\itcLinewidth,color=\itc@color](0.752762,1.25)--(\itcrmpt\itc@tempdima,1.25);
             \ifnum#3>1%
-                \draw [line width=\itcLinewidth](0.752762,1.75)--(\itcrmpt\itc@tempdima,1.75);
+                \draw [line width=\itcLinewidth,color=\itc@color](0.752762,1.75)--(\itcrmpt\itc@tempdima,1.75);
             \fi
         \fi
         \ifx#2\empty\else
@@ -162,7 +165,7 @@
             \itc@tempcnta=\itc@tapx
             \advance \itc@tempcnta 1
             \fill[black](\the\itc@tempcnta,-0.555306) circle[radius=0.2];
-            \draw[line width=\itcLinewidth](\the\itc@tempcnta,-0.555306)--(\the\itc@tempcnta,-1);%
+            \draw[line width=\itcLinewidth,color=\itc@color](\the\itc@tempcnta,-0.555306)--(\the\itc@tempcnta,-1);%
         }
         \fi
     \end{tikzpicture}%
