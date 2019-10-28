@@ -39,8 +39,8 @@
 \def\itcrmpt{\expandafter\itc@rmpt\the}
 %
 \edef\itc@color{black}
-\def\itccolor#1{\edef\itc@color{#1}\unskip}
-\def\itcresetcolor{\edef\itc@color{black}\unskip}
+\def\itccolor#1{\edef\itc@color{#1}}
+\def\itcresetcolor{\edef\itc@color{black}}
 % 抵抗
 \def\itcR{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
@@ -63,11 +63,11 @@
 \def\itc@@VR[#1]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-2) rectangle (3,2);%
-        \draw [line width=\itcLinewidth] (2,-2)--(2,-1)--(1.5,-0.8)--(2.5,-0.4)--(1.5,0)--(2.5,0.4)--(1.5,0.8)--(2.5,1.2)--(2,1.4)--(2,2);
+        \draw [line width=\itcLinewidth,color=\itc@color] (2,-2)--(2,-1)--(1.5,-0.8)--(2.5,-0.4)--(1.5,0)--(2.5,0.4)--(1.5,0.8)--(2.5,1.2)--(2,1.4)--(2,2);
         \ifx#1t%
-            \draw [line width=\itcLinewidth,-|] (0,0)--(1.5,0);
+            \draw [line width=\itcLinewidth,color=\itc@color,-|] (0,0)--(1.5,0);
         \else%
-            \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcUnitlength,angle'=30]}] (0,0)--(1.5,0);
+            \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcUnitlength,angle'=30]}] (0,0)--(1.5,0);
         \fi%
     \end{tikzpicture}%
 }
@@ -164,7 +164,7 @@
         \@for\itc@tapx:=#2\do{%
             \itc@tempcnta=\itc@tapx
             \advance \itc@tempcnta 1
-            \fill[black](\the\itc@tempcnta,-0.555306) circle[radius=0.2];
+            \fill[color=\itc@color](\the\itc@tempcnta,-0.555306) circle[radius=0.2];
             \draw[line width=\itcLinewidth,color=\itc@color](\the\itc@tempcnta,-0.555306)--(\the\itc@tempcnta,-1);%
         }
         \fi
@@ -187,10 +187,10 @@
     \ifnum#1=1
         \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
             \useasboundingbox (0,-2) rectangle (4,2);
-            \draw [line width=\itcLinewidth] (0,0)--(1.5,0);
-            \draw [line width=\itcLinewidth] (4,0)--+(-1.5,0);
-            \draw [line width=\itcLinewidth] (1.5,0)+(0,-1.5)--+(0,1.5);
-            \fill[black] (1.5,0)+(0.5,-0.5) rectangle +(1,0.5);
+            \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1.5,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,0)--+(-1.5,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (1.5,0)+(0,-1.5)--+(0,1.5);
+            \fill[color=\itc@color] (1.5,0)+(0.5,-0.5) rectangle +(1,0.5);
         \end{tikzpicture}%
     \else
         \ifodd#1
@@ -199,15 +199,15 @@
             \advance \itc@tempdima1.5 \p@
             \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
                 \useasboundingbox (0,-2) rectangle (\itcrmpt\itc@tempdima,2);
-                \draw [line width=\itcLinewidth] (0,0)--(1,0);
-                \draw [line width=\itcLinewidth] (\itcrmpt\itc@tempdima,0)--+(-1,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (\itcrmpt\itc@tempdima,0)--+(-1,0);
                 \itc@tempcnta=0%
                 \loop%
                     \itc@tempdima=\itc@tempcnta\p@%
                     \itc@tempdima=1.5\itc@tempdima%
                     \advance \itc@tempdima 1\p@%
-                    \draw [line width=\itcLinewidth] (\itcrmpt\itc@tempdima,0)+(0,-1.5)--+(0,1.5);
-                    \fill[black] (\itcrmpt\itc@tempdima,0)+(0.5,-0.5) rectangle +(1,0.5);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (\itcrmpt\itc@tempdima,0)+(0,-1.5)--+(0,1.5);
+                    \fill[color=\itc@color] (\itcrmpt\itc@tempdima,0)+(0.5,-0.5) rectangle +(1,0.5);
                     \advance\itc@tempcnta 1
                 \ifnum#1>\itc@tempcnta\repeat
             \end{tikzpicture}%
@@ -217,15 +217,15 @@
             \advance \itc@tempdima 1\p@
             \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
                 \useasboundingbox (0,-2) rectangle (\itcrmpt\itc@tempdima,2);
-                \draw [line width=\itcLinewidth] (0,0)--(0.75,0);
-                \draw [line width=\itcLinewidth] (\itcrmpt\itc@tempdima,0)--+(-0.75,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.75,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (\itcrmpt\itc@tempdima,0)--+(-0.75,0);
                 \itc@tempcnta=0
                 \loop
                     \itc@tempdima=\itc@tempcnta\p@
                     \itc@tempdima=1.5\itc@tempdima
                     \advance \itc@tempdima 0.75\p@
-                    \draw [line width=\itcLinewidth] (\itcrmpt\itc@tempdima,0)+(0,-1.5)--+(0,1.5);
-                    \fill[black] (\itcrmpt\itc@tempdima,0)+(0.5,-0.5) rectangle +(1,0.5);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (\itcrmpt\itc@tempdima,0)+(0,-1.5)--+(0,1.5);
+                    \fill[color=\itc@color] (\itcrmpt\itc@tempdima,0)+(0.5,-0.5) rectangle +(1,0.5);
                 \advance\itc@tempcnta 1
                 \ifnum#1>\itc@tempcnta\repeat%
             \end{tikzpicture}%
@@ -236,23 +236,23 @@
     \ifx#1s%
         \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
             \useasboundingbox (-1,-2) rectangle (1,0);
-            \draw [line width=\itcLinewidth] (0,0)--(0,-1);
-            \draw [line width=\itcLinewidth] (-0.625,-1)--++(0.625,-1)--++(0.625,1)--cycle;
+            \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0,-1);
+            \draw [line width=\itcLinewidth,color=\itc@color] (-0.625,-1)--++(0.625,-1)--++(0.625,1)--cycle;
         \end{tikzpicture}%
     \else
         \ifx#1c%
             \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
                 \useasboundingbox (-1,-2) rectangle (1,0);
-                \draw [line width=\itcLinewidth] (0,0)--++(0,-1)++(-1,0)--++(2,0)--++(-0.5,-1)++(-0.25,1)--++(-0.5,-1)++(-0.25,1)--++(-0.5,-1)++(-0.25,1);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--++(0,-1)++(-1,0)--++(2,0)--++(-0.5,-1)++(-0.25,1)--++(-0.5,-1)++(-0.25,1)--++(-0.5,-1)++(-0.25,1);
             \end{tikzpicture}%
         \else
             \ifx#1e%
                 \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
                     \useasboundingbox (-1,-2) rectangle (1,0);
-                    \draw [line width=\itcLinewidth] (0,0)--++(0,-1);
-                    \draw [line width=\itcLinewidth] (-1,-1)--++(2,0);
-                    \draw [line width=\itcLinewidth] (-0.625,-1.5)--++(1.25,0);
-                    \draw [line width=\itcLinewidth] (-0.25,-2)--++(0.5,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--++(0,-1);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (-1,-1)--++(2,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (-0.625,-1.5)--++(1.25,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (-0.25,-2)--++(0.5,0);
                 \end{tikzpicture}%
             \fi
         \fi
@@ -262,40 +262,40 @@
 \def\itcMeter[#1]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-2) rectangle (4,2);
-        \draw [line width=\itcLinewidth] (0,0)--(0.75,0);
-        \draw [line width=\itcLinewidth] (4,0)--++(-0.75,0);
-        \draw [line width=\itcLinewidth] (2,0) circle[radius=1.25];
+        \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.75,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (4,0)--++(-0.75,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (2,0) circle[radius=1.25];
         \draw (2,0) node{\itcmeterstrfont#1};
     \end{tikzpicture}%
 }
 \def\itcCurrent{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-2) rectangle (4,2);
-        \draw [line width=\itcLinewidth] (0,0)--(0.75,0);
-        \draw [line width=\itcLinewidth] (4,0)--++(-0.75,0);
-        \draw [line width=\itcLinewidth] (2,0) circle[radius=1.25];
+        \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.75,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (4,0)--++(-0.75,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (2,0) circle[radius=1.25];
         \itc@tempdima=\itcUnitlength
         \itc@tempdima=0.75\itc@tempdima
-        \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\the\itc@tempdima,angle'=30]}] (1,0)--(3,0);
+        \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\the\itc@tempdima,angle'=30]}] (1,0)--(3,0);
     \end{tikzpicture}%
 }
 \def\itcAC_#1{%
     \ifx#1h%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-2) rectangle (4,2);
-        \draw [line width=\itcLinewidth] (0,0)--(0.75,0);
-        \draw [line width=\itcLinewidth] (4,0)--++(-0.75,0);
-        \draw [line width=\itcLinewidth] (2,0) circle[radius=1.25];
-        \draw [line width=\itcLinewidth] (2,0) +(-0.9,0).. controls +(0.3,0.9) and +(-0.3,0.9) .. ++(0,0) .. controls +(0.3,-0.9) and +(-0.3,-0.9) .. +(0.9,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.75,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (4,0)--++(-0.75,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (2,0) circle[radius=1.25];
+        \draw [line width=\itcLinewidth,color=\itc@color] (2,0) +(-0.9,0).. controls +(0.3,0.9) and +(-0.3,0.9) .. ++(0,0) .. controls +(0.3,-0.9) and +(-0.3,-0.9) .. +(0.9,0);
     \end{tikzpicture}%
     \else
         \ifx#1v%
             \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
                 \useasboundingbox (-2,0) rectangle (2,4);
-                \draw [line width=\itcLinewidth] (0,0)--(0,0.75);
-                \draw [line width=\itcLinewidth] (0,4)--++(0,-0.75);
-                \draw [line width=\itcLinewidth] (0,2) circle[radius=1.25];
-                \draw [line width=\itcLinewidth] (0,2) +(-0.9,0).. controls +(0.3,0.9) and +(-0.3,0.9) .. ++(0,0) .. controls +(0.3,-0.9) and +(-0.3,-0.9) .. +(0.9,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0,0.75);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,4)--++(0,-0.75);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,2) circle[radius=1.25];
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,2) +(-0.9,0).. controls +(0.3,0.9) and +(-0.3,0.9) .. ++(0,0) .. controls +(0.3,-0.9) and +(-0.3,-0.9) .. +(0.9,0);
             \end{tikzpicture}%
         \fi
     \fi%
@@ -311,29 +311,29 @@
     \ifx#1c%
         \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
             \useasboundingbox (0,-2) rectangle (4,2);
-            \draw [line width=\itcLinewidth] (0,0)--(0.45,0);
-            \draw [line width=\itcLinewidth] (0.75,0) circle[radius=0.3];
-            \draw [line width=\itcLinewidth] (4,-1)--++(-0.45,0);
-            \draw [line width=\itcLinewidth] (4,-1) +(-0.75,0) circle[radius=0.3];
-            \draw [line width=\itcLinewidth] (4,1)--++(-0.45,0);
-            \draw [line width=\itcLinewidth] (4,1) +(-0.75,0) circle[radius=0.3];
+            \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.45,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (0.75,0) circle[radius=0.3];
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,-1)--++(-0.45,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,-1) +(-0.75,0) circle[radius=0.3];
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,1)--++(-0.45,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,1) +(-0.75,0) circle[radius=0.3];
             \ifx#2r%
-                \draw [line width=\itcLinewidth] (1.05,0)--(2.99,-1);
+                \draw [line width=\itcLinewidth,color=\itc@color] (1.05,0)--(2.99,-1);
             \else
-                \draw [line width=\itcLinewidth] (1.05,0)--(2.99,1);
+                \draw [line width=\itcLinewidth,color=\itc@color] (1.05,0)--(2.99,1);
             \fi
         \end{tikzpicture}%
     \else
         \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
             \useasboundingbox (0,-1) rectangle (4,2);
-            \draw [line width=\itcLinewidth] (0,0)--(0.45,0);
-            \draw [line width=\itcLinewidth] (4,0)--++(-0.45,0);
-            \draw [line width=\itcLinewidth] (0.75,0) circle[radius=0.3];
-            \draw [line width=\itcLinewidth] (4,0) +(-0.75,0) circle[radius=0.3];
+            \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.45,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,0)--++(-0.45,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (0.75,0) circle[radius=0.3];
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,0) +(-0.75,0) circle[radius=0.3];
             \ifx#1b%
-                \draw [line width=\itcLinewidth] (1.05,0)--++(2.42,0.45);
+                \draw [line width=\itcLinewidth,color=\itc@color] (1.05,0)--++(2.42,0.45);
             \else
-                \draw [line width=\itcLinewidth] (1.05,0)--(3,1.5);
+                \draw [line width=\itcLinewidth,color=\itc@color] (1.05,0)--(3,1.5);
             \fi
         \end{tikzpicture}%
     \fi%
@@ -362,54 +362,54 @@
         \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
             \useasboundingbox (0,-2) rectangle (5,2);
             \ifitc@tempa%
-                \draw [line width=\itcLinewidth] (0,-1)--(0.425,-1);
-                \draw [line width=\itcLinewidth] (0,1)--(0.425,1);
-                \draw [line width=\itcLinewidth] (5,0)--++(-0.725,0);
-                \draw [line width=\itcLinewidth] (5,0) ++(-1.45,1)--+(0.725,0)--+(0.725,-2)--+(0,-2);
-                \fill[black] (4.275,0) circle[radius=0.2];
-                \draw [line width=\itcLinewidth] (0.75,-1) circle[radius=0.3];
-                \draw [line width=\itcLinewidth] (3.25,-1) circle[radius=0.3];
-                \draw [line width=\itcLinewidth] (0.75,1) circle[radius=0.3];
-                \draw [line width=\itcLinewidth] (3.25,1) circle[radius=0.3];
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,-1)--(0.425,-1);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,1)--(0.425,1);
+                \draw [line width=\itcLinewidth,color=\itc@color] (5,0)--++(-0.725,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (5,0) ++(-1.45,1)--+(0.725,0)--+(0.725,-2)--+(0,-2);
+                \fill[color=\itc@color] (4.275,0) circle[radius=0.2];
+                \draw [line width=\itcLinewidth,color=\itc@color] (0.75,-1) circle[radius=0.3];
+                \draw [line width=\itcLinewidth,color=\itc@color] (3.25,-1) circle[radius=0.3];
+                \draw [line width=\itcLinewidth,color=\itc@color] (0.75,1) circle[radius=0.3];
+                \draw [line width=\itcLinewidth,color=\itc@color] (3.25,1) circle[radius=0.3];
                 \ifitc@tempb%
-                    \draw [line width=\itcLinewidth] (0.45,-0.65)--++(3.1,0);
-                    \draw [line width=\itcLinewidth] (2,-0.65)--++(0,0.5);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (0.45,-0.65)--++(3.1,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (2,-0.65)--++(0,0.5);
                 \else
-                    \draw [line width=\itcLinewidth] (0.45,0.65)--++(3.1,0);
-                    \draw [line width=\itcLinewidth] (2,0.65)--++(0,0.5);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (0.45,0.65)--++(3.1,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (2,0.65)--++(0,0.5);
                 \fi
             \else
-                \draw [line width=\itcLinewidth] (5,-1)--+(-0.425,0);
-                \draw [line width=\itcLinewidth] (5,1)--+(-0.425,0);
-                \draw [line width=\itcLinewidth] (0,0)--(0.725,0);
-                \draw [line width=\itcLinewidth] (1.45,1)--(0.725,1)--(0.725,0)--(0.725,-1)--(1.45,-1);
-                \fill[black] (0.725,0) circle[radius=0.2];
-                \draw [line width=\itcLinewidth] (1.75,-1) circle[radius=0.3];
-                \draw [line width=\itcLinewidth] (4.25,-1) circle[radius=0.3];
-                \draw [line width=\itcLinewidth] (1.75,1) circle[radius=0.3];
-                \draw [line width=\itcLinewidth] (4.25,1) circle[radius=0.3];
+                \draw [line width=\itcLinewidth,color=\itc@color] (5,-1)--+(-0.425,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (5,1)--+(-0.425,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.725,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (1.45,1)--(0.725,1)--(0.725,0)--(0.725,-1)--(1.45,-1);
+                \fill[color=\itc@color] (0.725,0) circle[radius=0.2];
+                \draw [line width=\itcLinewidth,color=\itc@color] (1.75,-1) circle[radius=0.3];
+                \draw [line width=\itcLinewidth,color=\itc@color] (4.25,-1) circle[radius=0.3];
+                \draw [line width=\itcLinewidth,color=\itc@color] (1.75,1) circle[radius=0.3];
+                \draw [line width=\itcLinewidth,color=\itc@color] (4.25,1) circle[radius=0.3];
                 \ifitc@tempb%
-                    \draw [line width=\itcLinewidth] (1.45,-0.65)--++(3.1,0);
-                    \draw [line width=\itcLinewidth] (3,-0.65)--++(0,0.5);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (1.45,-0.65)--++(3.1,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (3,-0.65)--++(0,0.5);
                 \else
-                    \draw [line width=\itcLinewidth] (1.45,0.65)--++(3.1,0);
-                    \draw [line width=\itcLinewidth] (3,0.65)--++(0,0.5);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (1.45,0.65)--++(3.1,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color] (3,0.65)--++(0,0.5);
                 \fi
             \fi%
         \end{tikzpicture}%
     \else
         \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
             \useasboundingbox (0,-1) rectangle (4,2);
-            \draw [line width=\itcLinewidth] (0,0)--(0.45,0);
-            \draw [line width=\itcLinewidth] (4,0)--++(-0.45,0);
-            \draw [line width=\itcLinewidth] (0.75,0) circle[radius=0.3];
-            \draw [line width=\itcLinewidth] (4,0) +(-0.75,0) circle[radius=0.3];
+            \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.45,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,0)--++(-0.45,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (0.75,0) circle[radius=0.3];
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,0) +(-0.75,0) circle[radius=0.3];
             \ifx#1b
-                \draw [line width=\itcLinewidth] (0.45,-0.42)--++(3.1,0);
-                \draw [line width=\itcLinewidth] (2,-0.42)--++(0,0.5);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0.45,-0.42)--++(3.1,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (2,-0.42)--++(0,0.5);
             \else
-                \draw [line width=\itcLinewidth] (0.45,1)--++(3.1,0);
-                \draw [line width=\itcLinewidth] (2,1)--++(0,0.5);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0.45,1)--++(3.1,0);
+                \draw [line width=\itcLinewidth,color=\itc@color] (2,1)--++(0,0.5);
             \fi
         \end{tikzpicture}%
     \fi%
@@ -418,83 +418,83 @@
 \def\itcD{%
 \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
     \useasboundingbox (0,-1) rectangle (4,1);
-    \draw [line width=\itcLinewidth] (0,0)--(1,0);
-    \draw [line width=\itcLinewidth] (3,0)--(4,0);
-    \fill[black](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
-    \fill[black] (2,0)+(1,1) rectangle +(0.714286,-1);
+    \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth,color=\itc@color] (3,0)--(4,0);
+    \fill[color=\itc@color](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
+    \fill[color=\itc@color] (2,0)+(1,1) rectangle +(0.714286,-1);
 \end{tikzpicture}%
 }
 % ツェナーダイオード
 \def\itcZD{%
 \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
     \useasboundingbox (0,-1) rectangle (4,1);
-    \draw [line width=\itcLinewidth] (0,0)--(1,0);
-    \draw [line width=\itcLinewidth] (2.714286,0)--(4,0);
-    \fill[black](2,0)+(-1.285714,1)--+(-1.285714,-1)--+(0.428571,0);
-    \fill[black](2,0)+(0.714286,1)--+(0.714286,-0.928571)--+(1.285714,-0.928571)--+(1.285714,-1)--+(0.428571,-1)--+(0.428571,0.928571)--+(-0.142857,0.928571)--+(-0.142857,1);
+    \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth,color=\itc@color] (2.714286,0)--(4,0);
+    \fill[color=\itc@color](2,0)+(-1.285714,1)--+(-1.285714,-1)--+(0.428571,0);
+    \fill[color=\itc@color](2,0)+(0.714286,1)--+(0.714286,-0.928571)--+(1.285714,-0.928571)--+(1.285714,-1)--+(0.428571,-1)--+(0.428571,0.928571)--+(-0.142857,0.928571)--+(-0.142857,1);
 \end{tikzpicture}%
 }
 % ショットキーダイオード
 \def\itcSBD{%
 \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
     \useasboundingbox (0,-2) rectangle (4,2);
-    \draw [line width=\itcLinewidth] (0,0)--(1,0);
-    \draw [line width=\itcLinewidth] (2.857143,0)--(4,0);
-    \fill[black](2,0)+(-1.142857,1)--+(-1.142857,-1)--+(0.571429,0);
-    \fill[black](2.571429,1)--(2.571429,-1) arc [start angle=360,end angle=180,radius=0.142857] --(2.285714,-1) arc[start angle=180,end angle=360,radius=0.285714]--(2.857143,1) arc [start angle=180,end angle=0,radius=0.142857]--(3.142857,1) arc[start angle=0,end angle=180,radius=0.285714];
+    \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth,color=\itc@color] (2.857143,0)--(4,0);
+    \fill[color=\itc@color](2,0)+(-1.142857,1)--+(-1.142857,-1)--+(0.571429,0);
+    \fill[color=\itc@color](2.571429,1)--(2.571429,-1) arc [start angle=360,end angle=180,radius=0.142857] --(2.285714,-1) arc[start angle=180,end angle=360,radius=0.285714]--(2.857143,1) arc [start angle=180,end angle=0,radius=0.142857]--(3.142857,1) arc[start angle=0,end angle=180,radius=0.285714];
 \end{tikzpicture}%
 }
 % 可変容量ダイオード
 \def\itcVCD{%
 \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
     \useasboundingbox (0,-1) rectangle (4,1);
-    \draw [line width=\itcLinewidth] (0,0)--(1,0);
-    \draw [line width=\itcLinewidth] (3.2857143,0)--(4,0);
-    \fill[black](2,0)+(-1.2857143,1)--+(-1.2857143,-1)--+(0.428571,0);
-    \fill[black] (2,0)+(0.428571,1) rectangle +(0.714286,-1);
-    \fill[black] (2,0)+(1,1) rectangle +(1.2857143,-1);
+    \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth,color=\itc@color] (3.2857143,0)--(4,0);
+    \fill[color=\itc@color](2,0)+(-1.2857143,1)--+(-1.2857143,-1)--+(0.428571,0);
+    \fill[color=\itc@color] (2,0)+(0.428571,1) rectangle +(0.714286,-1);
+    \fill[color=\itc@color] (2,0)+(1,1) rectangle +(1.2857143,-1);
 \end{tikzpicture}%
 }
 % LED
 \def\itcLED{%
 \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
     \useasboundingbox (0,-1) rectangle (4,3);
-    \draw [line width=\itcLinewidth] (0,0)--(1,0);
-    \draw [line width=\itcLinewidth] (3,0)--(4,0);
-    \fill[black](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
-    \fill[black] (2,0)+(1,1) rectangle +(0.714286,-1);
+    \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth,color=\itc@color] (3,0)--(4,0);
+    \fill[color=\itc@color](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
+    \fill[color=\itc@color] (2,0)+(1,1) rectangle +(0.714286,-1);
     \itc@tempdima=\itcUnitlength
     \itc@tempdima=0.75\itc@tempdima
-    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](2.25,1.75)--(3.5,3);
-    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](2.75,1.25)--(4,2.5);
+    \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](2.25,1.75)--(3.5,3);
+    \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](2.75,1.25)--(4,2.5);
     \end{tikzpicture}%
 }
 % フォトダイオード
 \def\itcPD{%
 \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
     \useasboundingbox (0,-3) rectangle (4,1);
-    \draw [line width=\itcLinewidth] (0,0)--(1,0);
-    \draw [line width=\itcLinewidth] (3,0)--(4,0);
-    \fill[black](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
-    \fill[black] (2,0)+(1,1) rectangle +(0.714286,-1);
+    \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth,color=\itc@color] (3,0)--(4,0);
+    \fill[color=\itc@color](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
+    \fill[color=\itc@color] (2,0)+(1,1) rectangle +(0.714286,-1);
     \itc@tempdima=\itcUnitlength
     \itc@tempdima=0.75\itc@tempdima
-    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](0.5,-3)--(1.75,-1.75);
-    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](0,-2.5)--(1.25,-1.25);
+    \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](0.5,-3)--(1.75,-1.75);
+    \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](0,-2.5)--(1.25,-1.25);
     \end{tikzpicture}%
 }
 % サイリスタ
 \def\itcSCR[#1]{%
 \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
     \useasboundingbox (0,-1) rectangle (4,1);
-    \draw [line width=\itcLinewidth] (0,0)--(1,0);
-    \draw [line width=\itcLinewidth] (3,0)--(4,0);
-    \fill[black](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
-    \fill[black] (2,0)+(1,1) rectangle +(0.714286,-1);
+    \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1,0);
+    \draw [line width=\itcLinewidth,color=\itc@color] (3,0)--(4,0);
+    \fill[color=\itc@color](2,0)+(-1,1)--+(-1,-1)--+(0.714286,0);
+    \fill[color=\itc@color] (2,0)+(1,1) rectangle +(0.714286,-1);
     \if#1l%
-        \draw [line width=\itcLinewidth] (3,0)--(4,1);
+        \draw [line width=\itcLinewidth,color=\itc@color] (3,0)--(4,1);
     \else
-        \draw [line width=\itcLinewidth] (3,0)--(4,-1);
+        \draw [line width=\itcLinewidth,color=\itc@color] (3,0)--(4,-1);
     \fi
     \end{tikzpicture}%
 }
@@ -503,27 +503,27 @@
 \def\itcTR[#1][#2]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-3) rectangle (6,3);
-        \draw [line width=\itcLinewidth] (3,0) circle[radius=2.25];
-        \fill [black] (1.875,-1.25) rectangle (2.25,1.25);
-        \draw [line width=\itcLinewidth](0,0)--(1.875,0);
-        \draw [line width=\itcLinewidth](4,3)--(4,2.015564);
-        \draw [line width=\itcLinewidth](4,-3)--(4,-2.015564);
+        \draw [line width=\itcLinewidth,color=\itc@color] (3,0) circle[radius=2.25];
+        \fill[color=\itc@color] (1.875,-1.25) rectangle (2.25,1.25);
+        \draw [line width=\itcLinewidth,color=\itc@color](0,0)--(1.875,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](4,3)--(4,2.015564);
+        \draw [line width=\itcLinewidth,color=\itc@color](4,-3)--(4,-2.015564);
         \itc@tempdima=\itcUnitlength
         \if#1p%
             \if#2l%
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,2.015565)--(2.2,0.52);
-                \draw [line width=\itcLinewidth](2.2,-0.52)--(4.02,-2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,2.015565)--(2.2,0.52);
+                \draw [line width=\itcLinewidth,color=\itc@color](2.2,-0.52)--(4.02,-2.015565);
             \else
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,-2.015565)--(2.2,-0.52);
-                \draw [line width=\itcLinewidth](2.2,0.52)--(4,2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,-2.015565)--(2.2,-0.52);
+                \draw [line width=\itcLinewidth,color=\itc@color](2.2,0.52)--(4,2.015565);
             \fi
         \else
             \if#2l%
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,0.52)--(4,2.015565);
-                \draw [line width=\itcLinewidth](2.2,-0.52)--(4,-2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,0.52)--(4,2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color](2.2,-0.52)--(4,-2.015565);
             \else
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,-0.52)--(4,-2.015565);
-                \draw [line width=\itcLinewidth](2.2,0.52)--(4,2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,-0.52)--(4,-2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color](2.2,0.52)--(4,2.015565);
             \fi
         \fi
     \end{tikzpicture}%
@@ -533,33 +533,33 @@
 \def\itcFET[#1][#2]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-3) rectangle (6,3);
-        \draw [line width=\itcLinewidth] (3,0) circle[radius=2.25];
-        \fill [black] (1.875,-1.25) rectangle (2.25,1.25);
-        \draw [line width=\itcLinewidth](4,3)--(4,1)--(2.25,1);
-        \draw [line width=\itcLinewidth](4,-3)--(4,-1)--(2.25,-1);
+        \draw [line width=\itcLinewidth,color=\itc@color] (3,0) circle[radius=2.25];
+        \fill[color=\itc@color] (1.875,-1.25) rectangle (2.25,1.25);
+        \draw [line width=\itcLinewidth,color=\itc@color](4,3)--(4,1)--(2.25,1);
+        \draw [line width=\itcLinewidth,color=\itc@color](4,-3)--(4,-1)--(2.25,-1);
         \itc@tempdima=\itcUnitlength
         \itc@tempdima=0.6\itc@tempdima
         \if#1p%
             \if#2c%
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](1.875,0)--(0.75,0);
-                \draw [line width=\itcLinewidth](0,0)--(0.75,0);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](1.875,0)--(0.75,0);
+                \draw [line width=\itcLinewidth,color=\itc@color](0,0)--(0.75,0);
             \else
                 \if#2l%
-                    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](1.875,1)--(1,1);
-                    \draw [line width=\itcLinewidth](0,1)--(1,1);
+                    \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](1.875,1)--(1,1);
+                    \draw [line width=\itcLinewidth,color=\itc@color](0,1)--(1,1);
                 \else
-                    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](1.875,-1)--(1,-1);
-                    \draw [line width=\itcLinewidth](0,-1)--(1,-1);
+                    \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](1.875,-1)--(1,-1);
+                    \draw [line width=\itcLinewidth,color=\itc@color](0,-1)--(1,-1);
                 \fi
             \fi
         \else
             \if#2c%
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](0,0)--(1.93,0);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](0,0)--(1.93,0);
             \else
                 \if#2l%
-                    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](0,1)--(1.93,1);
+                    \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](0,1)--(1.93,1);
                 \else
-                    \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](0,-1)--(1.93,-1);
+                    \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](0,-1)--(1.93,-1);
                 \fi
             \fi
         \fi
@@ -584,41 +584,41 @@
 \def\itc@@MOSFET[#1][#2][#3][#4]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-3) rectangle (6,3);
-        \draw [line width=\itcLinewidth] (3,0) circle[radius=2.25];
-        \fill [black] (2,-1) rectangle (1.625,1);
+        \draw [line width=\itcLinewidth,color=\itc@color] (3,0) circle[radius=2.25];
+        \fill[color=\itc@color] (2,-1) rectangle (1.625,1);
         \if#3c%
             \edef\itc@temparg{#4}
-            \draw [line width=\itcLinewidth] (0,0) -- (2,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (0,0) -- (2,0);
         \else
             \edef\itc@temparg{#3}
             \if#3l%
-                \draw [line width=\itcLinewidth] (0,1) -- (2,1);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,1) -- (2,1);
             \else
-                \draw [line width=\itcLinewidth] (0,-1) -- (2,-1);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,-1) -- (2,-1);
             \fi
         \fi
         \if#2d%
-            \fill [black] (2.375,1.5) rectangle (2.625,-1.5);
+            \fill[color=\itc@color] (2.375,1.5) rectangle (2.625,-1.5);
         \else
-            \fill [black] (2.375,1.5) rectangle (2.625, 0.75);
-            \fill [black] (2.375,0.375) rectangle (2.625, -0.375);
-            \fill [black] (2.375,-1.5) rectangle (2.625, -0.75);
+            \fill[color=\itc@color] (2.375,1.5) rectangle (2.625, 0.75);
+            \fill[color=\itc@color] (2.375,0.375) rectangle (2.625, -0.375);
+            \fill[color=\itc@color] (2.375,-1.5) rectangle (2.625, -0.75);
         \fi
-        \draw [line width=\itcLinewidth] (4,3)--(4,1)--(2.625,1);
-        \draw [line width=\itcLinewidth] (4,-3)--(4,-1)--(2.625,-1);
+        \draw [line width=\itcLinewidth,color=\itc@color] (4,3)--(4,1)--(2.625,1);
+        \draw [line width=\itcLinewidth,color=\itc@color] (4,-3)--(4,-1)--(2.625,-1);
         \if\itc@temparg l%
-            \draw [line width=\itcLinewidth] (4,1) -- (4,0);
-            \fill [black] (4,1) circle[radius=0.2];
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,1) -- (4,0);
+            \fill[color=\itc@color] (4,1) circle[radius=0.2];
         \else
-            \draw [line width=\itcLinewidth] (4,-1) -- (4,0);
-            \fill [black] (4,-1) circle[radius=0.2];
+            \draw [line width=\itcLinewidth,color=\itc@color] (4,-1) -- (4,0);
+            \fill[color=\itc@color] (4,-1) circle[radius=0.2];
         \fi
         \itc@tempdima=\itcUnitlength
         \itc@tempdima=0.75\itc@tempdima
         \if#1p%
-            \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}] (2.625,0)--(4,0);
+            \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}] (2.625,0)--(4,0);
         \else
-            \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]},cap=rect] (4,0)--(2.625,0);
+            \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]},cap=rect] (4,0)--(2.625,0);
         \fi
     \end{tikzpicture}%
 }
@@ -627,13 +627,13 @@
 \def\itcMOSTR[#1]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-2) rectangle (4,2);
-        \draw [line width=\itcLinewidth] (1.8,1)--++(0,-2);
-        \draw [line width=\itcLinewidth] (4,2)--(4,1)--(2.25,1)--(2.25,-1)--(4,-1)--(4,-2);
+        \draw [line width=\itcLinewidth,color=\itc@color] (1.8,1)--++(0,-2);
+        \draw [line width=\itcLinewidth,color=\itc@color] (4,2)--(4,1)--(2.25,1)--(2.25,-1)--(4,-1)--(4,-2);
         \if#1p%
-            \draw [line width=\itcLinewidth] (1.52,0) circle [radius=0.28];
-            \draw [line width=\itcLinewidth] (0,0)--(1.24,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (1.52,0) circle [radius=0.28];
+            \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(1.24,0);
         \else
-            \draw [line width=\itcLinewidth] (1.8,0)--(0,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (1.8,0)--(0,0);
         \fi
     \end{tikzpicture}%
 }
@@ -655,38 +655,38 @@
 \def\itc@@IGBT[#1][#2][#3]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-3) rectangle (6,3);
-        \draw [line width=\itcLinewidth] (3,0) circle[radius=2.25];
+        \draw [line width=\itcLinewidth,color=\itc@color] (3,0) circle[radius=2.25];
         \if#2c%
             \edef\itc@temparg{#3}
-            \draw [line width=\itcLinewidth] (0,0) -- (1.575,0);
+            \draw [line width=\itcLinewidth,color=\itc@color] (0,0) -- (1.575,0);
         \else
             \edef\itc@temparg{#2}
             \if#2l%
-                \draw [line width=\itcLinewidth] (0,1) -- (1.575,1);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,1) -- (1.575,1);
             \else
-                \draw [line width=\itcLinewidth] (0,-1) -- (1.575,-1);
+                \draw [line width=\itcLinewidth,color=\itc@color] (0,-1) -- (1.575,-1);
             \fi
         \fi
-        \fill [black] (1.25,-1) rectangle (1.575,1);
-        \fill [black] (1.875,-1.25) rectangle (2.25,1.25);
-        \draw [line width=\itcLinewidth](4,3)--(4,2.015564);
-        \draw [line width=\itcLinewidth](4,-3)--(4,-2.015564);
+        \fill[color=\itc@color] (1.25,-1) rectangle (1.575,1);
+        \fill[color=\itc@color] (1.875,-1.25) rectangle (2.25,1.25);
+        \draw [line width=\itcLinewidth,color=\itc@color](4,3)--(4,2.015564);
+        \draw [line width=\itcLinewidth,color=\itc@color](4,-3)--(4,-2.015564);
         \itc@tempdima=\itcUnitlength
         \if#1p%
             \if\itc@temparg l%
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,2.015565)--(2.2,0.52);
-                \draw [line width=\itcLinewidth](2.2,-0.52)--(4.02,-2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,2.015565)--(2.2,0.52);
+                \draw [line width=\itcLinewidth,color=\itc@color](2.2,-0.52)--(4.02,-2.015565);
             \else
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,-2.015565)--(2.2,-0.52);
-                \draw [line width=\itcLinewidth](2.2,0.52)--(4,2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,-2.015565)--(2.2,-0.52);
+                \draw [line width=\itcLinewidth,color=\itc@color](2.2,0.52)--(4,2.015565);
             \fi
         \else
             \if\itc@temparg l%
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,0.52)--(4,2.015565);
-                \draw [line width=\itcLinewidth](2.2,-0.52)--(4,-2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,0.52)--(4,2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color](2.2,-0.52)--(4,-2.015565);
             \else
-                \draw [line width=\itcLinewidth,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,-0.52)--(4,-2.015565);
-                \draw [line width=\itcLinewidth](2.2,0.52)--(4,2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,-0.52)--(4,-2.015565);
+                \draw [line width=\itcLinewidth,color=\itc@color](2.2,0.52)--(4,2.015565);
             \fi
         \fi
     \end{tikzpicture}%
@@ -696,28 +696,158 @@
 \def\itcOPAMP[#1][#2]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (-8,-4) rectangle (0,4);
-        \draw [line width=\itcLinewidth](0,0)--(-1,0);
-        \draw [line width=\itcLinewidth](-8,2)--++(1,0);
-        \draw [line width=\itcLinewidth](-8,-2)--++(1,0);
-        \draw [line width=\itcLinewidth](-1,0)--++(-6,3.5)--++(0,-7)--cycle;
+        \draw [line width=\itcLinewidth,color=\itc@color](0,0)--(-1,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](-8,2)--++(1,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](-8,-2)--++(1,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](-1,0)--++(-6,3.5)--++(0,-7)--cycle;
         \if#2v%
-            \draw [line width=\itcLinewidth](-4,4)--++(0,-2.25);
-            \draw [line width=\itcLinewidth](-4,-4)--++(0,2.25);
+            \draw [line width=\itcLinewidth,color=\itc@color](-4,4)--++(0,-2.25);
+            \draw [line width=\itcLinewidth,color=\itc@color](-4,-4)--++(0,2.25);
         \else
             \if#2r%
-                \draw [line width=\itcLinewidth](-4,3)--++(0,-1.25);
+                \draw [line width=\itcLinewidth,color=\itc@color](-4,3)--++(0,-1.25);
             \else
                 \if#2l%
-                    \draw [line width=\itcLinewidth](-4,-3)--++(0,1.25);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4,-3)--++(0,1.25);
                 \fi
             \fi
         \fi
-        \draw [line width=\itcLinewidth](-6.5,2)--++(1,0);
-        \draw [line width=\itcLinewidth](-6.5,-2)--++(1,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](-6.5,2)--++(1,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](-6.5,-2)--++(1,0);
         \if#1l%
-            \draw [line width=\itcLinewidth](-6,-2.5)--++(0,1);
+            \draw [line width=\itcLinewidth,color=\itc@color](-6,-2.5)--++(0,1);
         \else
-            \draw [line width=\itcLinewidth](-6,2.5)--++(0,-1);
+            \draw [line width=\itcLinewidth,color=\itc@color](-6,2.5)--++(0,-1);
+        \fi
+    \end{tikzpicture}%
+}
+% Transconductance OPAmp (e.g. LM13700)
+% #1: r:出力端子から見て+が右側, l:左側 #2 電源端子の有無 v: 両方 r: 出力端子から見て右側のみ l: 左側のみ 省略: ない #3 Io端子の向き
+\def\itcOTAMP[#1][#2][#3]{%
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (-10,-4) rectangle (0,4);
+        \draw [line width=\itcLinewidth,color=\itc@color](0,0)--(-1,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](-10,2)--++(1,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](-10,-2)--++(1,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](-3,0)--++(-6,3.5)--++(0,-7)--cycle;        
+        \draw [line width=\itcLinewidth,color=\itc@color](-2.375,0) circle[radius=0.625];
+        \draw [line width=\itcLinewidth,color=\itc@color](-1.625,0) circle[radius=0.625];
+        \if#3v%
+            \draw [line width=\itcLinewidth,color=\itc@color](-6,4)--++(0,-2.25);
+            \draw [line width=\itcLinewidth,color=\itc@color](-6,-4)--++(0,2.25);
+        \else
+            \if#3r%
+                \draw [line width=\itcLinewidth,color=\itc@color](-6,3)--++(0,-1.25);
+            \else
+                \if#3l%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-3)--++(0,1.25);
+                \fi
+            \fi
+        \fi
+        \draw [line width=\itcLinewidth,color=\itc@color](-8.5,2)--++(1,0);
+        \draw [line width=\itcLinewidth,color=\itc@color](-8.5,-2)--++(1,0);
+        \if#2l%
+            \draw [line width=\itcLinewidth,color=\itc@color](-8,-2.5)--++(0,1);
+        \else
+            \draw [line width=\itcLinewidth,color=\itc@color](-8,2.5)--++(0,-1);
+        \fi
+        \if#2l%
+            \draw [line width=\itcLinewidth,color=\itc@color](-2,-2)--++(0,1.5);
+        \else
+            \draw [line width=\itcLinewidth,color=\itc@color](-2,2)--++(0,-1.5);
+        \fi
+    \end{tikzpicture}%
+}
+% バッファ or NOT回路
+% #1 入力NOT n:NOT 省略:なし #2 出力NOT n:NOT 省略:なし #3 電源配線
+\def\itcBUF[#1][#2][#3]{%
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (-4,-2) rectangle (0,2);
+        \draw [line width=\itcLinewidth,color=\itc@color](-0.93911888,0)--++(-2.12176224,1.225)--++(0,-2.45)--cycle;        
+        \if#1n%
+            \draw [line width=\itcLinewidth,color=\itc@color](-4,0)--++(0.37911888,0);
+            \draw [line width=\itcLinewidth,color=\itc@color](-3.34088112, 0)circle[radius=0.28];
+        \else
+            \draw [line width=\itcLinewidth,color=\itc@color](-4,0)--++(0.93911888,0);
+        \fi
+        \if#2n%
+            \draw [line width=\itcLinewidth,color=\itc@color](0,0)--++(-0.37911888,0);
+            \draw [line width=\itcLinewidth,color=\itc@color](-0.65911888,0) circle[radius=0.28];
+        \else
+            \draw [line width=\itcLinewidth,color=\itc@color](0,0)--++(-0.93911888,0);
+        \fi
+        \if#3v%
+            \draw [line width=\itcLinewidth,color=\itc@color](-2,2)--++(0,-1.3875);
+            \draw [line width=\itcLinewidth,color=\itc@color](-2,-2)--++(0,1.3875);
+        \else
+            \if#3r%
+                \draw [line width=\itcLinewidth,color=\itc@color](-2,2)--++(0,-1.3875);
+            \else
+                \if#3l%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-2,-2)--++(0,1.3875);
+                \fi
+            \fi
+        \fi
+    \end{tikzpicture}%
+}
+% AND, NAND回路
+% #2 入力NOT n:NOT 省略:なし #3 出力NOT n:NOT 省略:なし #4 電源配線
+\def\itcAND[#1][#2][#3][#4]{%
+    \itc@tempcnta=#1
+    \ifnum#1=2\else%
+        \advance \itc@tempcnta 1
+        \divide \itc@tempcnta 2
+    \fi
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (-6,-\the\itc@tempcnta) rectangle (0,\the\itc@tempcnta);
+        \draw [line width=\itcLinewidth,color=\itc@color](-2.65,1.4)--++(-2.1,0)--++(0,-2.8)--++(2.1,0) arc (-90:90:1.4)--cycle;
+        \ifnum#1=2%
+            \if#2n%
+                \draw [line width=\itcLinewidth,color=\itc@color](-6,1)--++(0.69,0);
+                \draw [line width=\itcLinewidth,color=\itc@color](-5.03,1)circle[radius=0.28];
+                \draw [line width=\itcLinewidth,color=\itc@color](-6,-1)--++(0.69,0);
+                \draw [line width=\itcLinewidth,color=\itc@color](-5.03,-1)circle[radius=0.28];
+            \else
+                \draw [line width=\itcLinewidth,color=\itc@color](-6,1)--++(1.25,0);
+                \draw [line width=\itcLinewidth,color=\itc@color](-6,-1)--++(1.25,0);
+            \fi
+        \else
+            \itc@tempdima=#1\p@
+            \itc@tempdima=0.5\itc@tempdima
+            \advance \itc@tempdima -0.1\p@
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.75,\itcrmpt\itc@tempdima)--(-4.75,-\itcrmpt\itc@tempdima);
+            \itc@tempcnta=0
+            \itc@tempdima=#1\p@
+            \itc@tempdima=0.5\itc@tempdima
+            \advance \itc@tempdima -0.5\p@
+            \loop%
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,\itcrmpt\itc@tempdima)--++(0.69,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-5.03,\itcrmpt\itc@tempdima)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,\itcrmpt\itc@tempdima)--++(1.25,0);
+                \fi
+                \advance \itc@tempcnta 1
+                \advance \itc@tempdima -\p@
+            \ifnum\itc@tempcnta=#1\else \repeat%
+        \fi
+        \if#3n%
+            \draw [line width=\itcLinewidth,color=\itc@color](0,0)--++(-0.69,0);
+            \draw [line width=\itcLinewidth,color=\itc@color](-0.97,0) circle[radius=0.28];
+        \else
+            \draw [line width=\itcLinewidth,color=\itc@color](0,0)--++(-1.25,0);
+        \fi
+        \if#4v%
+            \draw [line width=\itcLinewidth,color=\itc@color](-3,2)--++(0,-0.6);
+            \draw [line width=\itcLinewidth,color=\itc@color](-3,-2)--++(0,0.6);
+        \else
+            \if#4r%
+                \draw [line width=\itcLinewidth,color=\itc@color](-3,2)--++(0,-0.6);
+            \else
+                \if#4l%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-3,-2)--++(0,0.6);
+                \fi
+            \fi
         \fi
     \end{tikzpicture}%
 }
