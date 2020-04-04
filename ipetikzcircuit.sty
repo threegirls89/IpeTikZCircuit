@@ -482,6 +482,16 @@
     \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](0.5,-3)--(1.75,-1.75);
     \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=25]}](0,-2.5)--(1.25,-1.25);
     \end{tikzpicture}%
+}% 定電流ダイオード
+\def\itcCRD{%
+\begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+    \useasboundingbox (0,-1) rectangle (4,1);
+    \fill [line width=\itcLinewidth,color=\itc@color] (1.774286,0) circle[radius=1];
+    \fill [line width=\itcLinewidth,color=white] (1.774286,0) circle[radius=0.85];
+    \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.834286,0);
+    \draw [line width=\itcLinewidth,color=\itc@color] (3,0)--(4,0);
+    \fill[color=\itc@color] (2,0)+(1,1) rectangle +(0.714286,-1);
+    \end{tikzpicture}%
 }
 % サイリスタ
 \def\itcSCR[#1]{%
