@@ -1,8 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}%
-\ProvidesPackage{ipetikzcircuit}[2019/02/26 ver.0.0.1 threegirls89]%
+\ProvidesPackage{ipetikzcircuit}[2020/04/05 ver.1.0.0 threegirls89]%
 \def\j@urnalname{ipetikzcircuit}
-\def\versi@ndate{Feb. 26, 2019}
-\def\versi@nno{ver.0.0.1}
+\def\versi@ndate{Apr. 5, 2020}
+\def\versi@nno{ver.1.0.0}
 \def\copyrighth@lder{threegirls89}
 \typeout{Option Style `\j@urnalname' (\versi@nno) <\versi@ndate>\space [\copyrighth@lder]}
 %
@@ -732,7 +732,7 @@
     \end{tikzpicture}%
 }
 % Transconductance OPAmp (e.g. LM13700)
-% #1: r:出力端子から見て+が右側, l:左側 #2 電源端子の有無 v: 両方 r: 出力端子から見て右側のみ l: 左側のみ 省略: ない #3 Io端子の向き
+% #1: r:出力端子から見て+が右側, l:左側 #3 電源端子の有無 v: 両方 r: 出力端子から見て右側のみ l: 左側のみ 省略: ない #2 Io端子の向き
 \def\itcOTAMP[#1][#2][#3]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (-10,-4) rectangle (0,4);
@@ -756,7 +756,7 @@
         \fi
         \draw [line width=\itcLinewidth,color=\itc@color](-8.5,2)--++(1,0);
         \draw [line width=\itcLinewidth,color=\itc@color](-8.5,-2)--++(1,0);
-        \if#2l%
+        \if#1l%
             \draw [line width=\itcLinewidth,color=\itc@color](-8,-2.5)--++(0,1);
         \else
             \draw [line width=\itcLinewidth,color=\itc@color](-8,2.5)--++(0,-1);
@@ -801,7 +801,7 @@
     \end{tikzpicture}%
 }
 % AND, NAND回路
-% #2 入力NOT n:NOT 省略:なし #3 出力NOT n:NOT 省略:なし #4 電源配線
+% #1 入力数 #2 入力NOT n:NOT 省略:なし #3 出力NOT n:NOT 省略:なし #4 電源配線
 \def\itcAND[#1][#2][#3][#4]{%
     \itc@tempcnta=#1
     \ifnum#1=2\else%
@@ -861,3 +861,253 @@
         \fi
     \end{tikzpicture}%
 }
+% OR, NOR回路
+% #1 入力数 #2 入力NOT n:NOT x: XOR 省略:なし #3 出力NOT n:NOT 省略:なし #4 電源配線
+% 三角関数，平方根，modの計算をできない？のでとりあえず74133を想定した13入力まで手打ち
+\def\itcOR[#1][#2][#3][#4]{%
+    \itc@tempcnta=#1
+    \ifnum#1=2\else%
+        \advance \itc@tempcnta 1
+        \divide \itc@tempcnta 2
+    \fi
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (-6,-\the\itc@tempcnta) rectangle (0,\the\itc@tempcnta);
+        \draw [line width=\itcLinewidth,color=\itc@color](-1.25,0) arc (30:90:2.8)--++(-1.0751288695,0)--++(-0,0) arc (30:-30:2.8)--++(1.0751288695,0)--++(0,0) arc (-90:-30:2.8)--cycle;
+        \ifnum#1=2%
+            \if#2n%
+                \draw [line width=\itcLinewidth,color=\itc@color](-6,1)--++(0.860698342,0);
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.859301657,1)circle[radius=0.28];
+                \draw [line width=\itcLinewidth,color=\itc@color](-6,-1)--++(0.860698342,0);
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.859301657,-1)circle[radius=0.28];
+            \else
+                \draw [line width=\itcLinewidth,color=\itc@color](-6,1)--++(1.440468236,0);
+                \draw [line width=\itcLinewidth,color=\itc@color](-6,-1)--++(1.440468236,0);
+            \fi
+        \fi
+        \ifodd#1%
+            \ifnum#1>2
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,1)--++(0.860698342,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.859301657,1)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-1)--++(0.860698342,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.859301657,-1)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,0)--++(1.065128869,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.654871131,0)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,1)--++(1.440468236,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-1)--++(1.440468236,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,0)--++(1.625128869,0);
+                \fi
+            \fi
+            \ifnum#1>4
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,2)--++(0.936230893,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.783769107,2)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-2)--++(0.936230893,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.783769107,-2)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,2)--++(1.508410442,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-2)--++(1.508410442,0);
+                \fi
+            \fi
+            \ifnum#1>6
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,3)--++(1.057259848,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.662740152,3)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-3)--++(1.057259848,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.662740152,-3)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,3)--++(1.617976878,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-3)--++(1.617976878,0);
+               \fi
+            \fi
+            \ifnum#1>8
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,4)--++(0.765047787,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.954952213,4)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-4)--++(0.765047787,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.954952213,-4)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,4)--++(1.354950998,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-4)--++(1.354950998,0);
+                \fi
+            \fi
+            \ifnum#1>10
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,5)--++(0.993428945,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.726571055,5)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-5)--++(0.993428945,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.726571055,-5)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,5)--++(1.560087736,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-5)--++(1.560087736,0);
+                \fi
+            \fi
+            \ifnum#1>12
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,6)--++(1.033508530,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.686491470,6)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-6)--++(1.033508530,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.686491470,-6)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,6)--++(1.5964101162,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-6)--++(1.5964101162,0);
+                \fi
+            \fi
+        \else
+            \ifnum#1>3
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,0.5)--++(1.015550361,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.704449639,0.5)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-0.5)--++(1.015550361,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.704449639,-0.5)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,1.5)--++(0.708908910,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-5.011091090,1.5)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-1.5)--++(0.708908910,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-5.011091090,-1.5)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,0.5)--++(1.580124332,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-0.5)--++(1.580124332,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,1.5)--++(1.305048223,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-1.5)--++(1.305048223,0);
+                \fi
+            \fi
+            \ifnum#1>5
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,2.5)--++(1.047389937,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.672610063,2.5)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-2.5)--++(1.047389937,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.672610063,-2.5)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,2.5)--++(1.609011051,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-2.5)--++(1.609011051,0);
+                \fi
+            \fi
+            \ifnum#1>7
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,3.5)--++(0.967034455,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.752965545,3.5)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-3.5)--++(0.967034455,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.752965545,-3.5)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,3.5)--++(1.536217212,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-3.5)--++(1.536217212,0);
+                \fi
+            \fi
+            \ifnum#1>9
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,4.5)--++(0.815527137,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.904472863,4.5)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-4.5)--++(0.815527137,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.904472863,-4.5)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,4.5)--++(1.400007507,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-4.5)--++(1.400007507,0);
+                \fi
+            \fi
+            \ifnum#1>11
+                \if#2n%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,5.5)--++(1.063163843,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.656836157,5.5)circle[radius=0.28];
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-5.5)--++(1.063163843,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-4.656836157,-5.5)circle[radius=0.28];
+                \else
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,5.5)--++(1.623342585,0);
+                    \draw [line width=\itcLinewidth,color=\itc@color](-6,-5.5)--++(1.623342585,0);
+                \fi
+            \fi
+        \fi
+        
+        \ifnum#1=13
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.523456414,-6.5) arc (-18.749340847:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:18.749340847:2.8);
+        \fi
+        \ifnum#1=12
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.403589838,-6) arc (-8.213210702:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:8.213210702:2.8);
+        \fi
+        \ifnum#1=11
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.376657415,-5.5) arc (2.046713098:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-2.046713098:2.8);
+        \fi
+        \ifnum#1=10
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.439912264,-5) arc (12.373625116:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-12.373625116:2.8);
+        \fi
+        \ifnum#1=9
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.599992493,-4.5) arc (23.132396399:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-23.132396399:2.8);
+        \fi
+        \ifnum#1=8
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.645049002,-4) arc (-25.376933525:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:25.376933525:2.8);
+        \fi
+        \ifnum#1=7
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.463782788,-3.5) arc (-14.477512186:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:14.477512186:2.8);
+        \fi
+        \ifnum#1=6
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.382023122,-3) arc (-4.096043758:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:4.096043758:2.8);
+        \fi
+        \ifnum#1=5
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.390988949,-2.5) arc (6.150639828:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-6.150639828:2.8);
+        \fi
+        \ifnum#1=4
+            \draw [line width=\itcLinewidth,color=\itc@color](-4.491589558,-2) arc (16.601549599:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-16.601549599:2.8);
+        \fi
+
+        \if#2x
+            \ifnum#1=13
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.873456414,-6.5) arc (-18.749340847:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:18.749340847:2.8);
+            \fi
+            \ifnum#1=12
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.753589838,-6) arc (-8.213210702:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:8.213210702:2.8);
+            \fi
+            \ifnum#1=11
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.726657415,-5.5) arc (2.046713098:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-2.046713098:2.8);
+            \fi
+            \ifnum#1=10
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.789912264,-5) arc (12.373625116:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-12.373625116:2.8);
+            \fi
+            \ifnum#1=9
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.949992493,-4.5) arc (23.132396399:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-23.132396399:2.8);
+            \fi
+            \ifnum#1=8
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.995049002,-4) arc (-25.376933525:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:25.376933525:2.8);
+            \fi
+            \ifnum#1=7
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.813782788,-3.5) arc (-14.477512186:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:14.477512186:2.8);
+            \fi
+            \ifnum#1=6
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.732023122,-3) arc (-4.096043758:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:4.096043758:2.8);
+            \fi
+            \ifnum#1=5
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.740988949,-2.5) arc (6.150639828:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-6.150639828:2.8);
+            \fi
+            \ifnum#1=4
+                \draw [line width=\itcLinewidth,color=\itc@color](-4.841589558,-2) arc (16.601549599:30:2.8) --++ (0,0) arc(-30:30:2.8) --++ (0,0) arc (-30:-16.601549599:2.8);
+            \fi
+            \ifnum4>#1
+            \draw [line width=\itcLinewidth,color=\itc@color](-5.1,-1.4) arc (-30:30:2.8);
+            \fi
+        \fi
+
+        \if#3n%
+            \draw [line width=\itcLinewidth,color=\itc@color](0,0)--++(-0.69,0);
+            \draw [line width=\itcLinewidth,color=\itc@color](-0.97,0) circle[radius=0.28];
+        \else
+            \draw [line width=\itcLinewidth,color=\itc@color](0,0)--++(-1.25,0);
+        \fi
+        \if#4v%
+            \draw [line width=\itcLinewidth,color=\itc@color](-3,2)--++(0,-0.682547340);
+            \draw [line width=\itcLinewidth,color=\itc@color](-3,-2)--++(0,0.682547340);
+        \else
+            \if#4r%
+                \draw [line width=\itcLinewidth,color=\itc@color](-3,2)--++(0,-0.682547340);
+            \else
+                \if#4l%
+                    \draw [line width=\itcLinewidth,color=\itc@color](-3,-2)--++(0,0.682547340);
+                \fi
+            \fi
+        \fi
+    \end{tikzpicture}%
+}
+% XOR, XNOR回路
+% #1 入力数 #2 出力NOT n:NOT 省略:なし #3 電源配線
+\def\itcXOR[#1][#2][#3]{%
+    \itcOR[#1][x][#2][#3]%
+}
+
