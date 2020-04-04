@@ -280,6 +280,16 @@
         \fi
     \fi%
 }
+\def\itcMotor{%
+    \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
+        \useasboundingbox (0,-2) rectangle (4,2);
+        \draw [line width=\itcLinewidth,color=\itc@color] (0,0)--(0.25,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (4,0)--++(-0.25,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (1,0.75)--++(-0.75,0)--++(0,-1.5)--++(0.75,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (3,0.75)--++(0.75,0)--++(0,-1.5)--++(-0.75,0);
+        \draw [line width=\itcLinewidth,color=\itc@color] (2,0) circle[radius=1.25];
+    \end{tikzpicture}%
+}
 \def\itcSW[#1]{%
     \ifx#1c\def\itc@nextproc{\itc@SW[#1]}\else\def\itc@nextproc{\itc@SW[#1][]}\fi
     \itc@nextproc%
