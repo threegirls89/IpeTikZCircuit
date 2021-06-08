@@ -22,7 +22,7 @@ TikZの利用により図の描画が爆速！
 IpeのスタイルファイルであるisyファイルとLaTeXのスタイルファイルであるstyファイルの2種類が提供されています。
 お好みの方をご利用ください。
 
-## isyファイルを利用する場合（速くて楽）
+## isyファイルを利用する場合 (Recommended)
 1. LaTeX，TikZとIpeを使用可能にしておく。
 
 2. メニューのEdit -> Style sheetsでIpe style sheetsウインドウを表示し，add -> ファイルダイアログでipetikzcircuit.isyを探して選択する。
@@ -31,7 +31,7 @@ IpeのスタイルファイルであるisyファイルとLaTeXのスタイルフ
 
 4. Enjoy!!
 
-## styファイルを使用する場合
+## styファイルを使用する場合 (deprecated)
 1. LaTeX，TikZとIpeを使用可能にしておく。
 
 2. ipetikzcircuit.styをtexmfツリーのどこか，または本スタイルファイルを適用したいファイルのあるディレクトリに設置する。
@@ -124,6 +124,18 @@ IpeのスタイルファイルであるisyファイルとLaTeXのスタイルフ
 
     モーメンタリ型のスイッチを描画する。
 
+* `\itcXtal`<br>
+    水晶振動子を描画する。
+
+* `\itcCeralock`<br>
+    セラミック発振器を描画する。
+
+* `\itcXtalsp`<br>
+    圧電スピーカを描画する。
+
+* `\itcDynamicsp`<br>
+    ダイナミックスピーカを描画する。
+
 * `\itcD`<br>
     ダイオードを描画する。
 
@@ -157,6 +169,13 @@ IpeのスタイルファイルであるisyファイルとLaTeXのスタイルフ
         #2 ベースから見たエミッタの向き。l（左），r（右）
 
     トランジスタを描画する。
+
+* `\itcPhotoTR[#1][#2]`<br>
+    引数:<br>
+        #1 構造。n（NPN型），p（PNP型）<br>
+        #2 ベースから見たエミッタの向き。l（左），r（右）
+
+    フォトトランジスタを描画する。
 
 * `\itcFET[#1][#2]`<br>
     引数:<br>
@@ -240,17 +259,33 @@ IpeのスタイルファイルであるisyファイルとLaTeXのスタイルフ
 ## その他コマンド
 * 回路図記号の大きさを変える
 
-    `\renewcommand{\itcUnitlength}{大きさ}`をIpe document propertiesのLatex preambleに記述する。
+    `\renewcommand{\itcUnitlength}{大きさ}`を記述する。
+
+    変更を全ての図に対し適用したい場合はIpe document propertiesのLatex preambleに書く。
+    この時，styファイルを利用している場合は`\usepackage{ipetikzcircuit}`の後に書く。
+
+    変更を特定の図に対し適用したい場合は，その図のlabelの最初の行に書く。
 
     デフォルトでは4 bp（bp: big point, 1/72 inchでありipeやpdfのptと同じ大きさの単位。なおlatexのptは1/72.27 inch）です。
 
-    isyファイルを利用している場合はどこに書いても好い。
-    styファイルを利用している場合は`\usepackage{ipetikzcircuit}`の後に書く。
 
 * 線の太さを変える
     `\renewcommand{\itcLinewidth}{太さ}`をIpe document propertiesのLatex preambleに記述する。
 
-    デフォルトでは0.5 bp。
+    変更を全ての図に対し適用したい場合はIpe document propertiesのLatex preambleに書く。
+    この時，styファイルを利用している場合は`\usepackage{ipetikzcircuit}`の後に書く。
 
-    isyファイルを利用している場合はどこに書いても好い。
-    styファイルを利用している場合は`\usepackage{ipetikzcircuit}`の後に書く。
+    変更を特定の図に対し適用したい場合は，その図のlabelの最初の行に書く。
+
+    デフォルトでは0.5 bp。（Ipeのバージョンによりデフォルトの線幅が0.5 bpだったり0.4 bpだったりするのはなんとかしてほしい……）
+
+
+* 回路図記号の色を変える
+    記号の色は`\itccolor{色名}`を，背景色は`\itcbgcolor{色名}`Ipe document propertiesのLatex preambleに記述する。
+
+    変更を全ての図に対し適用したい場合はIpe document propertiesのLatex preambleに書く。
+    この時，styファイルを利用している場合は`\usepackage{ipetikzcircuit}`の後に書く。
+
+    変更を特定の図に対し適用したい場合は，その図のlabelの最初の行に書く。
+
+    デフォルトでは，記号の色はblack，背景色はwhiteである。
