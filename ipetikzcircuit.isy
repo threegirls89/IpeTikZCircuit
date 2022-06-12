@@ -488,17 +488,22 @@
     \fi
     \end{tikzpicture}%
 }
-\def\itcTR[#1][#2]{%
+\def\itcTR{%
+\@ifstar{\itc@TR[n]}{\itc@TR[y]}%
+}
+\def\itc@TR[#1][#2][#3]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-3) rectangle (6,3);
+        \if#1y%
         \draw [line width=\itcLinewidth,color=\itc@color] (3,0) circle[radius=2.25];
+        \fi
         \fill[color=\itc@color] (1.875,-1.25) rectangle (2.25,1.25);
         \draw [line width=\itcLinewidth,color=\itc@color](0,0)--(1.875,0);
         \draw [line width=\itcLinewidth,color=\itc@color](4,3)--(4,2.015564);
         \draw [line width=\itcLinewidth,color=\itc@color](4,-3)--(4,-2.015564);
         \itc@tempdima=\itcUnitlength
-        \if#1p%
-            \if#2l%
+        \if#2p%
+            \if#3l%
                 \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,2.015565)--(2.2,0.52);
                 \draw [line width=\itcLinewidth,color=\itc@color](2.2,-0.52)--(4.02,-2.015565);
             \else
@@ -506,7 +511,7 @@
                 \draw [line width=\itcLinewidth,color=\itc@color](2.2,0.52)--(4,2.015565);
             \fi
         \else
-            \if#2l%
+            \if#3l%
                 \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,0.52)--(4,2.015565);
                 \draw [line width=\itcLinewidth,color=\itc@color](2.2,-0.52)--(4,-2.015565);
             \else
@@ -516,21 +521,26 @@
         \fi
     \end{tikzpicture}%
 }
-\def\itcFET[#1][#2]{%
+\def\itcFET{%
+\@ifstar{\itc@FET[n]}{\itc@FET[y]}%
+}
+\def\itc@FET[#1][#2][#3]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-3) rectangle (6,3);
+        \if#1y%
         \draw [line width=\itcLinewidth,color=\itc@color] (3,0) circle[radius=2.25];
+        \fi
         \fill[color=\itc@color] (1.875,-1.25) rectangle (2.25,1.25);
         \draw [line width=\itcLinewidth,color=\itc@color](4,3)--(4,1)--(2.25,1);
         \draw [line width=\itcLinewidth,color=\itc@color](4,-3)--(4,-1)--(2.25,-1);
         \itc@tempdima=\itcUnitlength
         \itc@tempdima=0.6\itc@tempdima
-        \if#1p%
-            \if#2c%
+        \if#2p%
+            \if#3c%
                 \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](1.875,0)--(0.75,0);
                 \draw [line width=\itcLinewidth,color=\itc@color](0,0)--(0.75,0);
             \else
-                \if#2l%
+                \if#3l%
                     \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](1.875,1)--(1,1);
                     \draw [line width=\itcLinewidth,color=\itc@color](0,1)--(1,1);
                 \else
@@ -539,10 +549,10 @@
                 \fi
             \fi
         \else
-            \if#2c%
+            \if#3c%
                 \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](0,0)--(1.93,0);
             \else
-                \if#2l%
+                \if#3l%
                     \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](0,1)--(1.93,1);
                 \else
                     \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=40]}](0,-1)--(1.93,-1);
@@ -551,37 +561,43 @@
         \fi
     \end{tikzpicture}%
 }
-\def\itcMOSFET[#1][#2][#3]{%
+\def\itcMOSFET{%
+\@ifstar{\itc@MOSFET@[n]}{\itc@MOSFET@[y]}%
+}
+\def\itc@MOSFET@[#1][#2][#3][#4]{%
     \def\itc@reservedarga{#1}%
     \def\itc@reservedargb{#2}%
     \def\itc@reservedargc{#3}%
+    \def\itc@reservedargd{#4}%
     \futurelet\itc@nexttok\itc@MOSFET%
 }
 \def\itc@MOSFET{%
     \ifx\itc@nexttok[%
-        \def\itc@nextproc{\itc@@MOSFET[\itc@reservedarga][\itc@reservedargb][\itc@reservedargc]}%
+        \def\itc@nextproc{\itc@@MOSFET[\itc@reservedarga][\itc@reservedargb][\itc@reservedargc][\itc@reservedargd]}%
     \else
-        \def\itc@nextproc{\itc@@MOSFET[\itc@reservedarga][\itc@reservedargb][\itc@reservedargc][]}%
+        \def\itc@nextproc{\itc@@MOSFET[\itc@reservedarga][\itc@reservedargb][\itc@reservedargc][\itc@reservedargd][]}%
     \fi
     \itc@nextproc%
 }
-\def\itc@@MOSFET[#1][#2][#3][#4]{%
+\def\itc@@MOSFET[#1][#2][#3][#4][#5]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-3) rectangle (6,3);
+        \if#1y%
         \draw [line width=\itcLinewidth,color=\itc@color] (3,0) circle[radius=2.25];
+        \fi
         \fill[color=\itc@color] (2,-1) rectangle (1.625,1);
-        \if#3c%
-            \edef\itc@temparg{#4}
+        \if#4c%
+            \edef\itc@temparg{#5}
             \draw [line width=\itcLinewidth,color=\itc@color] (0,0) -- (2,0);
         \else
-            \edef\itc@temparg{#3}
-            \if#3l%
+            \edef\itc@temparg{#4}
+            \if#5l%
                 \draw [line width=\itcLinewidth,color=\itc@color] (0,1) -- (2,1);
             \else
                 \draw [line width=\itcLinewidth,color=\itc@color] (0,-1) -- (2,-1);
             \fi
         \fi
-        \if#2d%
+        \if#3d%
             \fill[color=\itc@color] (2.375,1.5) rectangle (2.625,-1.5);
         \else
             \fill[color=\itc@color] (2.375,1.5) rectangle (2.625, 0.75);
@@ -599,7 +615,7 @@
         \fi
         \itc@tempdima=\itcUnitlength
         \itc@tempdima=0.75\itc@tempdima
-        \if#1p%
+        \if#2p%
             \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}] (2.625,0)--(4,0);
         \else
             \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]},cap=rect] (4,0)--(2.625,0);
@@ -619,28 +635,34 @@
         \fi
     \end{tikzpicture}%
 }
-\def\itcIGBT[#1][#2]{%
+\def\itcIGBT{%
+\@ifstar{\itc@IGBT@[n]}{\itc@IGBT@[y]}%
+}
+\def\itc@IGBT@[#1][#2][#3]{%
     \def\itc@reservedarga{#1}%
     \def\itc@reservedargb{#2}%
+    \def\itc@reservedargc{#3}%
     \futurelet\itc@nexttok\itc@IGBT%
 }
 \def\itc@IGBT{%
     \ifx\itc@nexttok[%
-        \def\itc@nextproc{\itc@@IGBT[\itc@reservedarga][\itc@reservedargb]}%
+        \def\itc@nextproc{\itc@@IGBT[\itc@reservedarga][\itc@reservedargb][\itc@reservedargc]}%
     \else
-        \def\itc@nextproc{\itc@@IGBT[\itc@reservedarga][\itc@reservedargb][]}%
+        \def\itc@nextproc{\itc@@IGBT[\itc@reservedarga][\itc@reservedargb][\itc@reservedargc][]}%
     \fi
     \itc@nextproc%
 }
-\def\itc@@IGBT[#1][#2][#3]{%
+\def\itc@@IGBT[#1][#2][#3][#4]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-3) rectangle (6,3);
+        \if#1y%
         \draw [line width=\itcLinewidth,color=\itc@color] (3,0) circle[radius=2.25];
-        \if#2c%
-            \edef\itc@temparg{#3}
+        \fi
+        \if#3c%
+            \edef\itc@temparg{#4}
             \draw [line width=\itcLinewidth,color=\itc@color] (0,0) -- (1.575,0);
         \else
-            \edef\itc@temparg{#2}
+            \edef\itc@temparg{#3}
             \if#2l%
                 \draw [line width=\itcLinewidth,color=\itc@color] (0,1) -- (1.575,1);
             \else
@@ -652,7 +674,7 @@
         \draw [line width=\itcLinewidth,color=\itc@color](4,3)--(4,2.015564);
         \draw [line width=\itcLinewidth,color=\itc@color](4,-3)--(4,-2.015564);
         \itc@tempdima=\itcUnitlength
-        \if#1p%
+        \if#2p%
             \if\itc@temparg l%
                 \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,2.015565)--(2.2,0.52);
                 \draw [line width=\itcLinewidth,color=\itc@color](2.2,-0.52)--(4.02,-2.015565);
@@ -1132,16 +1154,21 @@
         \draw [color=\itc@color] (3.25,0) circle[radius=0.3];
     \end{tikzpicture}%
 }
-\def\itcPhotoTR[#1][#2]{%
+\def\itcPhotoTR{%
+\@ifstar{\itc@PhotoTR[n]}{\itc@PhotoTR[y]}%
+}
+\def\itc@PhotoTR[#1][#2][#3]{%
     \begin{tikzpicture}[x=\itcUnitlength,y=\itcUnitlength]
         \useasboundingbox (0,-3) rectangle (6,3);
+        \if#1y%
         \draw [line width=\itcLinewidth,color=\itc@color] (3,0) circle[radius=2.25];
+        \fi
         \fill[color=\itc@color] (1.875,-1.25) rectangle (2.25,1.25);
         \draw [line width=\itcLinewidth,color=\itc@color](4,3)--(4,2.015564);
         \draw [line width=\itcLinewidth,color=\itc@color](4,-3)--(4,-2.015564);
         \itc@tempdima=\itcUnitlength
-        \if#1p%
-            \if#2l%
+        \if#2p%
+            \if#3l%
                 \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](4,2.015565)--(2.2,0.52);
                 \draw [line width=\itcLinewidth,color=\itc@color](2.2,-0.52)--(4.02,-2.015565);
             \else
@@ -1149,7 +1176,7 @@
                 \draw [line width=\itcLinewidth,color=\itc@color](2.2,0.52)--(4,2.015565);
             \fi
         \else
-            \if#2l%
+            \if#3l%
                 \draw [line width=\itcLinewidth,color=\itc@color,arrows={-Stealth[inset=0pt,length=\itcrmpt\itc@tempdima,angle'=30]}](2.2,0.52)--(4,2.015565);
                 \draw [line width=\itcLinewidth,color=\itc@color](2.2,-0.52)--(4,-2.015565);
             \else
